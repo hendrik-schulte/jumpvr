@@ -1,0 +1,225 @@
+fileFormatVersion: 2
+guid: 6b3edcb52bb8743409a9bfff5f47b575
+timeCreated: 1477430191
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bone
+    100002: Chest
+    100004: ChestManipulator
+    100006: ChestManipulator_end
+    100008: Club
+    100010: Head
+    100012: Head_end
+    100014: HeadManipulator
+    100016: HeadManipulator_end
+    100018: L_Arm
+    100020: L_Elbow
+    100022: L_Foot
+    100024: L_Foot_end
+    100026: L_Hand_1
+    100028: L_Hand_2
+    100030: L_Hip
+    100032: L_Index_1
+    100034: L_Index_2
+    100036: L_Index_2_end
+    100038: L_Knee
+    100040: L_Leg
+    100042: L_Pinky_1
+    100044: L_Pinky_2
+    100046: L_Pinky_2_end
+    100048: L_Shoulder
+    100050: L_Shoulder_2
+    100052: L_Thumb_1
+    100054: L_Thumb_2
+    100056: L_Thumb_2_end
+    100058: LeftHandManipulator
+    100060: LeftHandManipulator_end
+    100062: LeftHandPoll
+    100064: LeftHandPoll_end
+    100066: LeftLegManipulator
+    100068: LeftLegManipulator_end
+    100070: MainManipulator
+    100072: MainManipulator_end
+    100074: Neck
+    100076: PuzoManipulator
+    100078: PuzoManipulator_end
+    100080: R_Arm
+    100082: R_Elbow
+    100084: R_Foot
+    100086: R_Foot_end
+    100088: R_Hand_1
+    100090: R_Hand_2
+    100092: R_Hip
+    100094: R_Index_1
+    100096: R_Index_2
+    100098: R_Index_2_end
+    100100: R_Knee
+    100102: R_Leg
+    100104: R_Pinky_1
+    100106: R_Pinky_2
+    100108: R_Pinky_2_end
+    100110: R_Shoulder
+    100112: R_Shoulder_2
+    100114: R_Thumb_1
+    100116: R_Thumb_2
+    100118: R_Thumb_2_end
+    100120: RightHandManipulator
+    100122: RightHandManipulator_end
+    100124: RightHandPoll
+    100126: RightHandPoll_end
+    100128: RightLegManipulator
+    100130: RightLegManipulator_end
+    100132: Stomach
+    100134: Stomach_manipulator_bone
+    100136: Stomach_manipulator_bone_end
+    100138: //RootNode
+    100140: Troll
+    100142: TrollObj
+    100144: TrollRig
+    400000: Bone
+    400002: Chest
+    400004: ChestManipulator
+    400006: ChestManipulator_end
+    400008: Club
+    400010: Head
+    400012: Head_end
+    400014: HeadManipulator
+    400016: HeadManipulator_end
+    400018: L_Arm
+    400020: L_Elbow
+    400022: L_Foot
+    400024: L_Foot_end
+    400026: L_Hand_1
+    400028: L_Hand_2
+    400030: L_Hip
+    400032: L_Index_1
+    400034: L_Index_2
+    400036: L_Index_2_end
+    400038: L_Knee
+    400040: L_Leg
+    400042: L_Pinky_1
+    400044: L_Pinky_2
+    400046: L_Pinky_2_end
+    400048: L_Shoulder
+    400050: L_Shoulder_2
+    400052: L_Thumb_1
+    400054: L_Thumb_2
+    400056: L_Thumb_2_end
+    400058: LeftHandManipulator
+    400060: LeftHandManipulator_end
+    400062: LeftHandPoll
+    400064: LeftHandPoll_end
+    400066: LeftLegManipulator
+    400068: LeftLegManipulator_end
+    400070: MainManipulator
+    400072: MainManipulator_end
+    400074: Neck
+    400076: PuzoManipulator
+    400078: PuzoManipulator_end
+    400080: R_Arm
+    400082: R_Elbow
+    400084: R_Foot
+    400086: R_Foot_end
+    400088: R_Hand_1
+    400090: R_Hand_2
+    400092: R_Hip
+    400094: R_Index_1
+    400096: R_Index_2
+    400098: R_Index_2_end
+    400100: R_Knee
+    400102: R_Leg
+    400104: R_Pinky_1
+    400106: R_Pinky_2
+    400108: R_Pinky_2_end
+    400110: R_Shoulder
+    400112: R_Shoulder_2
+    400114: R_Thumb_1
+    400116: R_Thumb_2
+    400118: R_Thumb_2_end
+    400120: RightHandManipulator
+    400122: RightHandManipulator_end
+    400124: RightHandPoll
+    400126: RightHandPoll_end
+    400128: RightLegManipulator
+    400130: RightLegManipulator_end
+    400132: Stomach
+    400134: Stomach_manipulator_bone
+    400136: Stomach_manipulator_bone_end
+    400138: //RootNode
+    400140: Troll
+    400142: TrollObj
+    400144: TrollRig
+    2300000: Club
+    2300002: TrollObj
+    3300000: Club
+    3300002: TrollObj
+    4300000: TrollObj
+    4300002: Club
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
