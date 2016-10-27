@@ -63,7 +63,7 @@ public class OptiTrackJoint : TrackingJoint
         }
         else
         {
-            Debug.LogError("Not finding joint: "+ _rigidBodyName);
+            Debug.LogWarning("Not finding joint: "+ _rigidBodyName);
         }
     }
 
