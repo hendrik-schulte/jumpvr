@@ -8105,6 +8105,7 @@ MonoBehaviour:
   _jointType: 0
   _setRotation: 0
   _setPosition: 1
+  DebugLog: 0
 --- !u!114 &11414616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8119,6 +8120,7 @@ MonoBehaviour:
   _jointType: 6
   _setRotation: 1
   _setPosition: 1
+  DebugLog: 0
 --- !u!114 &11417824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8229,6 +8231,7 @@ MonoBehaviour:
   _jointType: 3
   _setRotation: 1
   _setPosition: 1
+  DebugLog: 0
 --- !u!114 &11438762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8243,6 +8246,7 @@ MonoBehaviour:
   _jointType: 4
   _setRotation: 1
   _setPosition: 1
+  DebugLog: 0
 --- !u!114 &11445782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8279,6 +8283,7 @@ MonoBehaviour:
   _jointType: 7
   _setRotation: 1
   _setPosition: 1
+  DebugLog: 0
 --- !u!114 &11450038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8307,6 +8312,7 @@ MonoBehaviour:
   _jointType: 2
   _setRotation: 1
   _setPosition: 1
+  DebugLog: 0
 --- !u!114 &11467186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8405,6 +8411,7 @@ MonoBehaviour:
   _jointType: 5
   _setRotation: 1
   _setPosition: 1
+  DebugLog: 0
 --- !u!114 &11490476
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8419,6 +8426,7 @@ MonoBehaviour:
   _jointType: 8
   _setRotation: 1
   _setPosition: 1
+  DebugLog: 0
 --- !u!114 &11496458
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8444,6 +8452,7 @@ MonoBehaviour:
   _jointType: 1
   _setRotation: 1
   _setPosition: 1
+  DebugLog: 0
 --- !u!124 &12443452
 Behaviour:
   m_ObjectHideFlags: 1

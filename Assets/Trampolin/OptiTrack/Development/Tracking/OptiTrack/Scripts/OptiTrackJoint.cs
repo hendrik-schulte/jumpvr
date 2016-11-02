@@ -13,6 +13,9 @@ public class OptiTrackJoint : TrackingJoint
 
     private Vector3 _startPos, _offset;
 
+    [SerializeField]
+    private bool DebugLog = false;
+
     private void Awake()
     {
         _startPos = transform.localPosition;
@@ -63,7 +66,7 @@ public class OptiTrackJoint : TrackingJoint
         }
         else
         {
-            Debug.LogWarning("Not finding joint: "+ _rigidBodyName);
+            if (DebugLog) Debug.LogWarning("Not finding joint: " + _rigidBodyName);
         }
     }
 
