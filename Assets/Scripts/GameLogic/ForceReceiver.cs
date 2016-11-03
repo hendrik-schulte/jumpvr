@@ -1,16 +1,7 @@
 ﻿using UnityEngine;
 
-public class ForceReceiver : MonoBehaviour
+[RequireComponent(typeof(Collider))]
+public abstract class ForceReceiver : MonoBehaviour
 {
-    void Awake()
-    {    
-    }
-
-   void Start()
-    {
-    }
-
-    void Update()
-    {
-    }
+    public abstract void OnHit(Vector3 impulse);
 }

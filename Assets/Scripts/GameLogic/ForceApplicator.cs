@@ -1,39 +1,95 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ForceApplicator : MonoBehaviour
 {
-//    [SerializeField]
-//    private LayerMask CollisionLayers;
+    [SerializeField]
+    [Range(1, 15)]
+    private int SpeedDepth = 1;
 
-    private Collider ForceCollider;
+
+    [SerializeField]
+    private List<Vector3> RelativePositions;
+
+    private List<float> TimeSteps;
+
+    private Vector3 PreviousPosition;
+
+    [SerializeField]
+    private bool GUIEnabled = false;
+
+    private Vector3 Velocity;
+
+    //    private Collider ForceCollider;
 
     void Awake()
     {
-        ForceCollider = GetComponent<Collider>();
+        //        ForceCollider = GetComponent<Collider>();
+
+        RelativePositions = new List<Vector3>();
+        TimeSteps = new List<float>();
     }
 
     void Start()
     {
+        PreviousPosition = transform.localPosition;
     }
 
     void Update()
     {
+        UpdateVelocity();
+    }
+
+
+    void UpdateVelocity()
+    {
+        RelativePositions.Insert(0, transform.localPosition - PreviousPosition);
+        TimeSteps.Insert(0, Time.deltaTime);
+
+        PreviousPosition = transform.localPosition;
+
+        while (RelativePositions.Count > SpeedDepth)
+        {
+            RelativePositions.RemoveAt(RelativePositions.Count - 1);
+            TimeSteps.RemoveAt(TimeSteps.Count - 1);
+        }
+
+        var tempVel = new Vector3();
+        float accTime = 0;
+
+        for (int index = 0; index < RelativePositions.Count; index++)
+        {
+            tempVel += RelativePositions[index];
+            accTime += TimeSteps[index];
+        }
+
+        Velocity = tempVel / accTime;
     }
 
     void OnCollisionEnter(Collision collision)
     {
-//        print("Collision with " + collision.gameObject.name);
-//        print("Col layer: " + LayerMask.LayerToName(collision.gameObject.layer));
-//        print("allowed layer: " + CollisionLayers.value + ", " + LayerMask.LayerToName(CollisionLayers.value));
-
-
         if (collision.gameObject.layer != LayerMask.NameToLayer("Destructable")) return;
 
-        print("Hit with force: " + collision.impulse);
+        ForceReceiver receiver = collision.gameObject.GetComponent<ForceReceiver>();
 
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            Debug.DrawRay(contact.point, contact.normal, Color.white, 1f);
-        }
+        if (receiver) receiver.OnHit(Velocity);
+
+
+//        print("Hit with force: " + Velocity + " magnitude: " + Velocity.magnitude);
+
+//        Debug.
+
+        //        foreach (ContactPoint contact in collision.contacts)
+        //        {
+        //            Debug.DrawRay(contact.point, contact.normal, Color.white, 1f);
+        //        }
+    }
+
+    void OnGUI()
+    {
+        if (!GUIEnabled) return;
+
+        GUI.Label(new Rect(0, 0, 300, 20), "Velocity: " + Velocity);
+        GUI.Label(new Rect(0, 20, 300, 20), "Vel Magnitude: " + Velocity.magnitude.ToString("F"));
     }
 }
