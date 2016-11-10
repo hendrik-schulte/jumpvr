@@ -60,6 +60,8 @@ public class AvatarManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+
+        DontDestroyOnLoad(transform.gameObject);
     }
 
     private void Start()
@@ -122,9 +124,11 @@ public class AvatarManager : MonoBehaviour
         }
     }
 
-    public void CalibrateAvatars()
+    public void CalibrateAvatars(bool scale)
     {
-        _scaleTransform.CalibrateScale();
+        if(scale)
+            _scaleTransform.CalibrateScale();
+
         GetComponent<ApplySimpleDifference>().Calibrate();
     }
 
@@ -203,6 +207,11 @@ public class AvatarManager : MonoBehaviour
             SetPerspective(_currentPerspectiveIndex);
         }
 
+    }
+
+    public int CurrentPerspectiveIndex()
+    {
+        return _currentPerspectiveIndex;
     }
 
 }

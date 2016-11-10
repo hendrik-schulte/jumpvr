@@ -8168,6 +8168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191ab3a42f730554e80a9cbc58d0a426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tPoseDummy: {fileID: 0}
+  tPoseText: {fileID: 0}
   _jumpDifferenceThreshold: 0.1
   _jumpRecognitionOffset: 0.15
   _landingOffset: 0.08
@@ -8177,6 +8179,12 @@ MonoBehaviour:
   _keyToResetStatistics: 114
   _secondsTillCalibration: 20
   _timeInTPoseNeeded: 5
+  _initialize: {fileID: 0}
+  _goIntoTPose: {fileID: 0}
+  _startCalibrationClip: {fileID: 0}
+  _finishCalibrationClip: {fileID: 0}
+  _finishCalibrationVoice: {fileID: 0}
+  _preDelay: 10
   _userContainer: {fileID: 407230}
 --- !u!114 &11422680
 MonoBehaviour:

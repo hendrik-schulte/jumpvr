@@ -5,11 +5,15 @@ using System;
 using Plotter;
 using TrampolinComponents;
 using UnityEngine.VR;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public delegate void CalibrationHandler();
-
+[RequireComponent(typeof(AudioSource))]
 public class Trampolin : MonoBehaviour
 {
+    public GameObject tPoseDummy; //Mesh that shows the T-Pose the user should perform
+    public Text tPoseText; //Used to display the instructions
     //vars in inspector
     [SerializeField]
     [Tooltip("Every frame difference between two positions. Is this difference > jumpThreshold, State will be Jumping")]
@@ -34,17 +38,31 @@ public class Trampolin : MonoBehaviour
     private KeyCode _keyToResetStatistics = KeyCode.R;
     [SerializeField]
     [Tooltip("Starts Calibration automatically after x seconds")]
-    private float _secondsTillCalibration = 1.0f;
+    private float _secondsTillCalibration = 5.0f;
     [SerializeField]
     [Tooltip("Starts Calibration when in TPose after x seconds")]
-    private float _timeInTPoseNeeded = 5.0f;
-
-
+    private float _timeInTPoseNeeded = 3.0f;
+    [SerializeField, Tooltip("Sound for calibration start")]
+    AudioClip _initialize;
+    [SerializeField, Tooltip("Sound for calibration start")]
+    AudioClip _goIntoTPose;
+    [SerializeField, Tooltip("Sound for calibration start")]
+    AudioClip _startCalibrationClip;
+    [SerializeField, Tooltip("Sound for calibration finish")]
+    AudioClip _finishCalibrationClip;
+    [SerializeField, Tooltip("Voice output for calibration finish")]
+    AudioClip _finishCalibrationVoice;
+    [SerializeField, Tooltip("Seconds before auto calibration")]
+    private float _preDelay = 10.0f;
+    AudioSource _audioSource;
+    private bool _calibrationStarted = false;
 
     [SerializeField]
     private Transform _userContainer;
 
     private Vector3 _userContainerStart;
+
+    
 
     //all joint transforms
     public Transform Head {get; private set;}
@@ -103,19 +121,42 @@ public class Trampolin : MonoBehaviour
 
     private Coroutine _staysInTPose;
     private bool _isInTPose;
+    private bool scalingEnabled = true;
+    
+
     private void Awake()
     {
+        
+        if (_instance == null)
+        {
+            DontDestroyOnLoad(transform.gameObject);
+            _instance = this;
+        }
+        else if (_instance != this)
+        {
+            //var tPointer = *trampolin;
+            Destroy(this.gameObject);
+        }
+
+
         JumpMultiplier = 0;
-        _instance = this;
+        //_instance = this;
+        _audioSource = GetComponent<AudioSource>();
         //init trampolin components
         _measurement = gameObject.AddComponent<Measurement>();
         _interaction = gameObject.AddComponent<Interaction>();
         _stateController = gameObject.AddComponent<StateController>();
         UpdateStateControllerVars();
+        
+        
+        
     }
 
     private void Start()
     {
+//        tPoseDummy = GameObject.Find("tPoseDummy");
+//        tPoseText = GameObject.Find("tPoseText").GetComponent<TextScript>();
+        
         //adding joints
         Head = TrackingManager.Instance.Head != null ? TrackingManager.Instance.Head.transform : null;
         LeftFoot = TrackingManager.Instance.LeftFoot != null ? TrackingManager.Instance.LeftFoot.transform : null;
@@ -144,20 +185,69 @@ public class Trampolin : MonoBehaviour
         _isCalibrated = false;
         RegisterOnStateChanged(ChangedState);
         //vpc = new ValuePlotterController(this.gameObject, new Rect(0, 0, 100, 100), Color.black, Color.white, -30, 30);
-
-        //StartCoroutine(StartCalibration(_secondsTillCalibration));
+        StartCoroutine(VoiceGuidance());
+        StartCoroutine(WaitAndStartCalibration( _preDelay,_secondsTillCalibration));
     }
 
+
+    IEnumerator VoiceGuidance()
+    {
+        PlayAudioClip(_initialize);
+        yield return new WaitForSeconds(_initialize.length);
+        PlayAudioClip(_goIntoTPose);
+    }
+
+    IEnumerator WaitAndStartCalibration(float waitForSeconds, float calibrationDelay)
+    {
+        tPoseDummy.SetActive(true);
+        tPoseText.text = "Nehmen Sie die gezeigte T-Pose ein.";
+        //yield return new WaitForSeconds(3);
+        //
+        //yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(waitForSeconds);
+        if(!_isCalibrated)
+            StartCoroutine(StartCalibration(calibrationDelay));
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="delay"></param>
+    /// <returns></returns>
     IEnumerator StartCalibration(float delay)
     {
-        yield return new WaitForSeconds(delay);
-        _isCalibrated = true;
-        TrackingManager.Instance.CalibrateJoints();
-        AvatarManager.Instance.CalibrateAvatars();
-        _measurement.Calibrate();
-        _interaction.Calibrate();
-        InputTracking.Recenter();
-        CalibrationDone();
+        Debug.Log("StartCalibration() "+ _calibrationStarted);
+        if (!_calibrationStarted)
+        {
+            //tPoseDummy.SetActive(true);
+            _calibrationStarted = true;
+            Debug.Log("Start Calibration");
+            tPoseText.text = "Halten Sie die T-Pose.";
+
+            PlayAudioClip(_startCalibrationClip);
+        
+            yield return new WaitForSeconds(_startCalibrationClip.length);
+            
+            yield return new WaitForSeconds(delay);
+            
+
+            _isCalibrated = true;
+           
+            TrackingManager.Instance.CalibrateJoints();
+            AvatarManager.Instance.CalibrateAvatars(scalingEnabled);
+            _measurement.Calibrate();
+            _interaction.Calibrate();
+            InputTracking.Recenter();
+            Debug.Log("grea-uuuht success! (Calibrated)");
+            PlayAudioClip(_finishCalibrationClip);
+            CalibrationDone();
+            yield return new WaitForSeconds(_finishCalibrationClip.length);
+            PlayAudioClip(_finishCalibrationVoice);
+            
+            _calibrationStarted = false;
+            GameManager.Instance.CalibrationDone();
+            tPoseDummy.SetActive(false);
+        }
+        
     }
 
     private void Update()
@@ -214,8 +304,9 @@ public class Trampolin : MonoBehaviour
         }
         if (_isInTPose)
         {
-            //Debug.Log("CALIBRATION!");
-            StartCoroutine(StartCalibration(0f));
+            Debug.Log("Tpose erkannt");
+            if(!_calibrationStarted)
+                StartCoroutine(StartCalibration(2f));
         } 
     }
 
@@ -292,4 +383,54 @@ public class Trampolin : MonoBehaviour
         CalibrationDone += method;
     }
 
+    void PlayAudioClip(AudioClip clip)
+    {
+        if(clip != null)
+        {
+            _audioSource.clip = clip;
+            _audioSource.Play();
+        }
+    }
+
+    public bool IsCalibrated()
+    {
+        return _isCalibrated;
+    }
+
+    public void ReCalibrate()
+    {
+        if (!_calibrationStarted)
+        {
+            Debug.Log("Recalibrate()");
+            
+            Head = TrackingManager.Instance.Head != null ? TrackingManager.Instance.Head.transform : null;
+            LeftFoot = TrackingManager.Instance.LeftFoot != null ? TrackingManager.Instance.LeftFoot.transform : null;
+            RightFoot = TrackingManager.Instance.RightFoot != null ? TrackingManager.Instance.RightFoot.transform : null;
+            LeftHand = TrackingManager.Instance.LeftHand != null ? TrackingManager.Instance.LeftHand.transform : null;
+            RightHand = TrackingManager.Instance.RightHand != null ? TrackingManager.Instance.RightHand.transform : null;
+            LeftKnee = TrackingManager.Instance.LeftKnee != null ? TrackingManager.Instance.LeftKnee.transform : null;
+            RightKnee = TrackingManager.Instance.RightKnee != null ? TrackingManager.Instance.RightKnee.transform : null;
+            LeftElbow = TrackingManager.Instance.LeftElbow != null ? TrackingManager.Instance.LeftElbow.transform : null;
+            RightElbow = TrackingManager.Instance.RightElbow != null ? TrackingManager.Instance.RightElbow.transform : null;
+
+            //put joints in list
+            _joints = new List<Transform>();
+            _joints.Add(Head);
+            _joints.Add(RightHand);
+            _joints.Add(LeftHand);
+            _joints.Add(RightFoot);
+            _joints.Add(LeftFoot);
+            _joints.Add(RightElbow);
+            _joints.Add(LeftElbow);
+            _joints.Add(RightKnee);
+            _joints.Add(LeftKnee);
+            _joints.RemoveAll(item => item == null);
+            _isCalibrated = false;
+
+            scalingEnabled = false;
+
+            StartCoroutine(VoiceGuidance());
+            StartCoroutine(WaitAndStartCalibration(_preDelay, _secondsTillCalibration)); 
+        }
+    }
 }
