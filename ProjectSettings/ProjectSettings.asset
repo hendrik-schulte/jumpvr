@@ -4,7 +4,6 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
-  productGUID: f357b00fbb8e90d4db9ce7623a1c8df0
   AndroidProfiler: 0
   defaultScreenOrientation: 4
   targetDevice: 2
@@ -74,7 +73,6 @@ PlayerSettings:
   ignoreAlphaClear: 0
   xboxOneResolution: 0
   xboxOneMonoLoggingLevel: 0
-  xboxOneLoggingLevel: 1
   ps3SplashScreen: {fileID: 0}
   videoMemoryForVertexBuffers: 0
   psp2PowerMode: 0
@@ -101,6 +99,7 @@ PlayerSettings:
   xboxOneDisableKinectGpuReservation: 0
   singlePassStereoRendering: 0
   protectGraphicsMemory: 0
+  productGUID: f357b00fbb8e90d4db9ce7623a1c8df0
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 19
   AndroidPreferredInstallLocation: 1
@@ -285,12 +284,10 @@ PlayerSettings:
   ps4PatchPkgPath: 
   ps4PatchLatestPkgPath: 
   ps4PatchChangeinfoPath: 
-  ps4PatchDayOne: 0
   ps4attribUserManagement: 0
   ps4attribMoveSupport: 0
   ps4attrib3DSupport: 0
   ps4attribShareSupport: 0
-  ps4attribExclusiveVR: 0
   ps4disableAutoHideSplash: 0
   ps4IncludedModules: []
   monoEnv: 
@@ -375,7 +372,6 @@ PlayerSettings:
   tizenSigningProfileName: 
   tizenGPSPermissions: 0
   tizenMicrophonePermissions: 0
-  tizenMinOSVersion: 0
   n3dsUseExtSaveData: 0
   n3dsCompressStaticMem: 1
   n3dsExtSaveDataNumber: 0x12345
