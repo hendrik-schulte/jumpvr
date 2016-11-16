@@ -1,17 +1,20 @@
 fileFormatVersion: 2
-guid: bb5e571ee2f8cf542b767326d0cf41e9
-timeCreated: 1479222147
+guid: b340869122ae0084c9207e7f4a5fba6d
+timeCreated: 1479222953
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: default
-    400000: //RootNode
-    400002: default
-    2300000: default
-    3300000: default
-    4300000: default
+    100000: box9
+    100002: pSphere3
+    100004: //RootNode
+    400000: box9
+    400002: pSphere3
+    400004: //RootNode
+    2300000: pSphere3
+    3300000: pSphere3
+    4300000: pSphere3
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -70,7 +73,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
