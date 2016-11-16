@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using System;
-using Plotter;
 using TrampolinComponents;
 using UnityEngine.VR;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public delegate void CalibrationHandler();
@@ -129,7 +126,7 @@ public class Trampolin : MonoBehaviour
         
         if (_instance == null)
         {
-            DontDestroyOnLoad(transform.gameObject);
+//            DontDestroyOnLoad(transform.gameObject);
             _instance = this;
         }
         else if (_instance != this)
@@ -154,9 +151,6 @@ public class Trampolin : MonoBehaviour
 
     private void Start()
     {
-//        tPoseDummy = GameObject.Find("tPoseDummy");
-//        tPoseText = GameObject.Find("tPoseText").GetComponent<TextScript>();
-        
         //adding joints
         Head = TrackingManager.Instance.Head != null ? TrackingManager.Instance.Head.transform : null;
         LeftFoot = TrackingManager.Instance.LeftFoot != null ? TrackingManager.Instance.LeftFoot.transform : null;
@@ -239,11 +233,12 @@ public class Trampolin : MonoBehaviour
             InputTracking.Recenter();
             Debug.Log("grea-uuuht success! (Calibrated)");
             PlayAudioClip(_finishCalibrationClip);
-            CalibrationDone();
+            if(CalibrationDone != null) CalibrationDone();
             yield return new WaitForSeconds(_finishCalibrationClip.length);
             PlayAudioClip(_finishCalibrationVoice);
             
             _calibrationStarted = false;
+            tPoseText.text = "";
             GameManager.Instance.CalibrationDone();
             tPoseDummy.SetActive(false);
         }

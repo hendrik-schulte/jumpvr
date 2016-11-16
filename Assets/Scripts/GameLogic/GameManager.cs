@@ -24,6 +24,6 @@ public class GameManager : MonoBehaviour
 
     public void CalibrationDone()
     {
-        
+        print("Start Game!");
     }
 }
