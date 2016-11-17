@@ -6,6 +6,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public Text Text;
+    public GameObject MainMenu;
+    public GameObject Camera;
+
+    private Animator CameraAnimator;
 
     void Awake()
     {
@@ -14,16 +18,31 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
-    }
-
-    void Update()
-    {
-
+        CameraAnimator = Camera.GetComponent<Animator>();
     }
 
     public void CalibrationDone()
     {
-        print("Start Game!");
+        print("Calibration Done!");
+        MainMenu.SetActive(true);
+    }
+
+    public void Recalibrate()
+    {
+        MainMenu.SetActive(false);
+
+        Trampolin.Instance.Recalibrate();
+    }
+
+    public void StartGame()
+    {
+        print("Starting Game!");
+        MainMenu.SetActive(false);
+
+    }
+
+    public void Blur()
+    {
+        CameraAnimator.SetTrigger("Blurry");
     }
 }

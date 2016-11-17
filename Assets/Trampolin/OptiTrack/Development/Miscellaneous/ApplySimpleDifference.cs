@@ -8,6 +8,7 @@ public class ApplySimpleDifference : MonoBehaviour
     private Transform _whichToApply;
 
     private Vector3 _startApply, _myStart;
+    [SerializeField]
     private bool locked;
 
     private void Start()

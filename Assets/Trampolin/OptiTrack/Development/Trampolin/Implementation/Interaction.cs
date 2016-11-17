@@ -68,7 +68,7 @@ namespace TrampolinComponents
         private void OnGesturePerformed(InteractionGestureEventArgs ig)
         {
             _isLockedUntilNextJump[ig.PerformedGesture] = true;
-            PerformedInteractionGesture(ig);
+            if(PerformedInteractionGesture != null) PerformedInteractionGesture(ig);
         }
 
         public void Calibrate()

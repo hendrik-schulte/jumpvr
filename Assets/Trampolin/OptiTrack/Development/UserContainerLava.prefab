@@ -8157,6 +8157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _whichToApply: {fileID: 437650}
+  locked: 0
 --- !u!114 &11420554
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -202,12 +202,19 @@ public class Trampolin : MonoBehaviour
         if(!_isCalibrated)
             StartCoroutine(StartCalibration(calibrationDelay));
     }
+
+    public void Recalibrate()
+    {
+        scalingEnabled = false;
+        StartCoroutine(StartCalibration());
+    }
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="delay"></param>
     /// <returns></returns>
-    IEnumerator StartCalibration(float delay)
+    IEnumerator StartCalibration(float delay = 0)
     {
         Debug.Log("StartCalibration() "+ _calibrationStarted);
         if (!_calibrationStarted)
