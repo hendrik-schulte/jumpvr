@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
-public abstract class ForceReceiver : MonoBehaviour
+public interface ForceReceiver
 {
-    public abstract void OnHit(Vector3 impulse);
+    void OnHit(Vector3 impulse);
 }

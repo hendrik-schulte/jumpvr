@@ -19,6 +19,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010347241160}
+  - 135: {fileID: 135000011138343078}
+  - 114: {fileID: 114000012716381554}
   m_Layer: 8
   m_Name: Manager Village
   m_TagString: Untagged
@@ -104,7 +106,6 @@ GameObject:
   - 4: {fileID: 4000013433897068}
   - 198: {fileID: 198000013484980382}
   - 199: {fileID: 199000010825492336}
-  - 114: {fileID: 114000013087392398}
   m_Layer: 0
   m_Name: FX_Explosion_Rubble
   m_TagString: Untagged
@@ -121,7 +122,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012305872496}
   - 95: {fileID: 95000014119920436}
-  - 114: {fileID: 114000011577588124}
   m_Layer: 8
   m_Name: Village2
   m_TagString: Untagged
@@ -135,9 +135,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010420676738}
-  m_LocalRotation: {x: 0, y: 0.89207375, z: 0, w: 0.45188996}
+  m_LocalRotation: {x: -0, y: 0.89207375, z: -0, w: 0.45188996}
   m_LocalPosition: {x: -0.48000014, y: -0.00033299174, z: 0.2771281}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.50000036, y: 0.5, z: 0.50000036}
   m_LocalEulerAnglesHint: {x: 0, y: 126.27, z: 0}
   m_Children:
   - {fileID: 4000012305872496}
@@ -318,29 +318,34 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114000011577588124
+--- !u!114 &114000012716381554
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013910493998}
+  m_GameObject: {fileID: 1000010420676738}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c806c64eafce1c74b8f50f86efce6aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particles: {fileID: 198000013484980382}
---- !u!114 &114000013087392398
-MonoBehaviour:
+  Animator: {fileID: 95000014119920436}
+  ParticleSystem: {fileID: 198000013484980382}
+  ForceThreshold: 5
+  IsLiving: 1
+  DebugKeys: 0
+--- !u!135 &135000011138343078
+SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013119657174}
+  m_GameObject: {fileID: 1000010420676738}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f8d171970c3621498e0095b220f4e25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 2
+  m_Radius: 0.35
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198000011051299976
 ParticleSystem:
   m_ObjectHideFlags: 1

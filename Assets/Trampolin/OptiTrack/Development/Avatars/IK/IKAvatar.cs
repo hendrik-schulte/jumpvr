@@ -29,8 +29,6 @@ public class IKAvatar : VirtualAvatar
 
     void OnAnimatorIK()
     {
-        if (DebugLog) print("OnAnimatorIK");
-
         //if the IK is active, set the position and rotation directly to the goal. 
         if (_isIKActive)
         {

@@ -153,7 +153,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012412010356}
-  m_Layer: 0
+  - 135: {fileID: 135000014046871920}
+  - 114: {fileID: 114000010542969452}
+  m_Layer: 8
   m_Name: Manager Katapult
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +238,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011301557912}
   - 95: {fileID: 95000011600908664}
-  - 114: {fileID: 114000014094858836}
   m_Layer: 0
   m_Name: KatapultBig3
   m_TagString: Untagged
@@ -376,7 +377,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012317341636}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.0006288147, y: -0.00033332076, z: 0.5542562}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -710,6 +711,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000010542969452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012317341636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c806c64eafce1c74b8f50f86efce6aab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 95000011600908664}
+  ParticleSystem: {fileID: 198000012024886016}
+  ForceThreshold: 5
+  IsLiving: 1
+  DebugKeys: 0
 --- !u!114 &114000012834868940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -721,18 +738,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a885fc8fc7ee44ea223e3768ad5cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114000014094858836
-MonoBehaviour:
+--- !u!135 &135000014046871920
+SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013996311432}
+  m_GameObject: {fileID: 1000012317341636}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d9e0852efb61941afd228f1b72904c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particles: {fileID: 198000012024886016}
+  serializedVersion: 2
+  m_Radius: 0.18
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198000012021523520
 ParticleSystem:
   m_ObjectHideFlags: 1

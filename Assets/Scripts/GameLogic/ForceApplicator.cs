@@ -72,7 +72,7 @@ public class ForceApplicator : MonoBehaviour
 
         ForceReceiver receiver = collision.gameObject.GetComponent<ForceReceiver>();
 
-        if (receiver) receiver.OnHit(Velocity);
+        if (receiver != null) receiver.OnHit(Velocity);
 
 
 //        print("Hit with force: " + Velocity + " magnitude: " + Velocity.magnitude);
