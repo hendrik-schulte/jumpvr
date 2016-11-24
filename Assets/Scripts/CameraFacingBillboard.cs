@@ -3,7 +3,7 @@
 //[ExecuteInEditMode]
 public class CameraFacingBillboard : MonoBehaviour
 {
-    public Camera m_Camera;
+    //public Camera m_Camera;
 
 //    [SerializeField]
 //    [Range(0, 1)]
@@ -22,7 +22,7 @@ public class CameraFacingBillboard : MonoBehaviour
         //        transform.LookAt(transform.position + m_Camera.transform.rotation * -Vector3.forward,
         //            m_Camera.transform.rotation * Vector3.up);
 
-        transform.LookAt(m_Camera.transform.position, Vector3.up);
+        transform.LookAt(Camera.main.transform.position, Vector3.up);
 
 //        transform.rotation = Quaternion.Euler(
 //            Mathf.Lerp(-180, transform.rotation.eulerAngles.x, RotationFactor),
