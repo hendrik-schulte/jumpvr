@@ -8200,6 +8200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isIKActive: 1
   _IKHintWeight: 0.5
+  DebugLog: 0
 --- !u!114 &11427108
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -5,7 +5,6 @@ public class IKAvatar : VirtualAvatar
     [SerializeField]
     private bool _isIKActive = false;
 
-
     //here, you could maybe try different weight values for the hints,
     //other values might provide a better solution
     //However, note that we experienced a worse performance with hints than without any hints!
@@ -14,6 +13,9 @@ public class IKAvatar : VirtualAvatar
     private float _IKHintWeight = 0.5f;
 
     private Animator _animator;
+
+    [SerializeField]
+    private bool DebugLog = false;
 
     void Awake()
     {
@@ -24,9 +26,11 @@ public class IKAvatar : VirtualAvatar
     {
         _animator = GetComponent<Animator>();
     }
-    
+
     void OnAnimatorIK()
     {
+        if (DebugLog) print("OnAnimatorIK");
+
         //if the IK is active, set the position and rotation directly to the goal. 
         if (_isIKActive)
         {
@@ -58,12 +62,12 @@ public class IKAvatar : VirtualAvatar
 
             _animator.SetLookAtWeight(0);
         }
-        
+
     }
 
     private void SetIK(AvatarIKGoal ikLink, Transform goal)
     {
-        if (goal!=null)
+        if (goal != null)
         {
             _animator.SetIKPosition(ikLink, goal.position);
             _animator.SetIKRotation(ikLink, goal.rotation);
