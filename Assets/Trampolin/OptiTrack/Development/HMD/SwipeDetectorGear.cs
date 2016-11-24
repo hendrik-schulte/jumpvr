@@ -1,8 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 public class SwipeDetectorGear : MonoBehaviour
 {
+    public static SwipeDetectorGear Instance;
+
+    public class SwipeEvent : UnityEvent { }
 
     private const int mMessageWidth = 200;
     private const int mMessageHeight = 64;
@@ -33,6 +38,21 @@ public class SwipeDetectorGear : MonoBehaviour
 
     private Vector2 mStartPosition;
     private float mSwipeStartTime;
+
+    private SwipeEvent OnSwipeTopEvent;
+    private SwipeEvent OnSwipeDownEvent;
+    private SwipeEvent OnSwipeLeftEvent;
+    private SwipeEvent OnSwipeRightEvent;
+
+    void Awake()
+    {
+        if(!Instance) Instance = this;
+
+        OnSwipeTopEvent = new SwipeEvent();
+        OnSwipeDownEvent = new SwipeEvent();
+        OnSwipeLeftEvent = new SwipeEvent();
+        OnSwipeRightEvent = new SwipeEvent();
+    }
 
     // Use this for initialization
     void Start()
@@ -104,6 +124,26 @@ public class SwipeDetectorGear : MonoBehaviour
         }
     }
 
+    public void AddSwipeDownListener(UnityAction action)
+    {
+        OnSwipeDownEvent.AddListener(action);
+    }
+
+    public void AddSwipeTopListener(UnityAction action)
+    {
+        OnSwipeTopEvent.AddListener(action);
+    }
+
+    public void AddSwipeLeftListener(UnityAction action)
+    {
+        OnSwipeLeftEvent.AddListener(action);
+    }
+
+    public void AddSwipeRightListener(UnityAction action)
+    {
+        OnSwipeRightEvent.AddListener(action);
+    }
+
     void OnGUI()
     {
         // Display the appropriate message
@@ -116,20 +156,26 @@ public class SwipeDetectorGear : MonoBehaviour
     private void OnSwipeLeft()
     {
         AvatarManager.Instance.SwitchToNextAvatar();
+
+        OnSwipeLeftEvent.Invoke();
     }
 
     private void OnSwipeRight()
     {
         //add some functionality in the future?
+        OnSwipeRightEvent.Invoke();
     }
 
     private void OnSwipeTop()
     {
         //add some functionality in the future?
+        OnSwipeTopEvent.Invoke();
     }
 
     private void OnSwipeBottom()
     {
-         AvatarManager.Instance.SwitchToNextPerspective();
+        AvatarManager.Instance.SwitchToNextPerspective();
+
+        OnSwipeDownEvent.Invoke();
     }
 }

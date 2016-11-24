@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         CameraAnimator = Camera.GetComponent<Animator>();
+
+        SwipeDetectorGear.Instance.AddSwipeTopListener(Recalibrate);
     }
 
     public void CalibrationDone()
