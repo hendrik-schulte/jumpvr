@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Destructible : MonoBehaviour, ForceReceiver
 {
@@ -7,9 +8,6 @@ public class Destructible : MonoBehaviour, ForceReceiver
 
     [SerializeField]
     private Animator Animator;
-    int destroy = Animator.StringToHash("Destroy");
-//    public ParticleSystem particles;
-    int spawn = Animator.StringToHash("Spawn");
 
     [SerializeField]
     private ParticleSystem ParticleSystem;
@@ -20,20 +18,28 @@ public class Destructible : MonoBehaviour, ForceReceiver
     private float ForceThreshold = 5;
 
     [SerializeField]
+    [NonEditable]
     private bool IsLiving = true;
+
+    [SerializeField]
+    private bool DoNotDestroy = false;
 
     [Header("Debug Values")]
     [SerializeField]
     private bool DebugKeys;
 
+    private GameEvent OnDestroyEvent;
 
-    // Use this for initialization
-    void Start()
+    public Destructible()
     {
-        if(!Animator) Animator = GetComponent<Animator>();
+        OnDestroyEvent = new GameEvent();
     }
 
-    // Update is called once per frame
+    void Awake()
+    {
+        if (!Animator) Animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
         if (!IsLiving || !DebugKeys) return;
@@ -44,13 +50,25 @@ public class Destructible : MonoBehaviour, ForceReceiver
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            Animator.SetTrigger(spawn);
+            Animator.SetTrigger(Animator.StringToHash("Spawn"));
         }
     }
 
     public bool IsAlive()
     {
         return IsLiving;
+    }
+
+    public void Spawn()
+    {
+        Animator.SetTrigger(Animator.StringToHash("Spawn"));
+    }
+
+    public void DestroyAnimation()
+    {
+        Animator.SetTrigger(Animator.StringToHash("Destroy"));
+        ParticleSystem.time = 0;
+        ParticleSystem.Play(true);
     }
 
 
@@ -64,15 +82,15 @@ public class Destructible : MonoBehaviour, ForceReceiver
         if (!IsLiving) return;
 
         IsLiving = false;
-        Animator.SetTrigger(destroy);
-        ParticleSystem.Play(true);
+        DestroyAnimation();
+        OnDestroyEvent.Invoke();
 
-        Timer(2, delegate
-        {
-//            ParticleSystem.Stop(true);
-//            ParticleSystem.Clear(true);
-            Destroy(gameObject);
-        });
+        if (!DoNotDestroy) Timer(2, delegate
+          {
+              //            ParticleSystem.Stop(true);
+              //            ParticleSystem.Clear(true);
+              Destroy(gameObject);
+          });
     }
 
     private void Timer(float time, Callback callback)
@@ -85,5 +103,10 @@ public class Destructible : MonoBehaviour, ForceReceiver
         yield return new WaitForSeconds(time);
 
         callback();
+    }
+
+    public void AddOnDestroyListener(UnityAction Action)
+    {
+        OnDestroyEvent.AddListener(Action);
     }
 }
