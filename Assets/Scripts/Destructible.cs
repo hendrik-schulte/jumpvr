@@ -12,6 +12,9 @@ public class Destructible : MonoBehaviour, ForceReceiver
     [SerializeField]
     private ParticleSystem ParticleSystem;
 
+    [SerializeField]
+    private AudioSource AudioSource;
+
     [Header("Gameplay Values")]
     [SerializeField]
     [Range(0, 50)]
@@ -38,6 +41,7 @@ public class Destructible : MonoBehaviour, ForceReceiver
     void Awake()
     {
         if (!Animator) Animator = GetComponent<Animator>();
+        if (!AudioSource) AudioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -71,6 +75,13 @@ public class Destructible : MonoBehaviour, ForceReceiver
         ParticleSystem.Play(true);
     }
 
+    public void DestroySound()
+    {
+        if (!AudioSource) return;
+
+        AudioSource.PlayOneShot(AudioSource.clip);
+    }
+
 
     public void OnHit(Vector3 impulse)
     {
@@ -83,6 +94,7 @@ public class Destructible : MonoBehaviour, ForceReceiver
 
         IsLiving = false;
         DestroyAnimation();
+        DestroySound();
         OnDestroyEvent.Invoke();
 
         if (!DoNotDestroy) Timer(2, delegate
