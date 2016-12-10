@@ -17,7 +17,7 @@ public class Destructible : MonoBehaviour, ForceReceiver
 
     [Header("Gameplay Values")]
     [SerializeField]
-    [Range(0, 50)]
+    [Range(0, 10)]
     private float ForceThreshold = 5;
 
     [SerializeField]

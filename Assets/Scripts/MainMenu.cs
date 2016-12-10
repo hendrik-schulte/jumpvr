@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,23 +16,36 @@ public class MainMenu : MonoBehaviour
     [Range(0, 10)]
     private float FadeOutTime = 3;
 
-    private RealWorldButton[] Buttons;
+    [SerializeField]
+    private bool DisabledOnStart = true;
 
-    public MainMenu()
-    {
-        if (!Instance) Instance = this;
-    }
+    [Header("Debug")]
+    [SerializeField]
+    private bool DebugLog;
+
+    private RealWorldButton[] Buttons;
 
     private void Awake()
     {
+        if (!Instance) Instance = this;
+
+        if (DisabledOnStart)
+        {
+            gameObject.SetActive(false);
+            StartGameVillage.gameObject.SetActive(true);
+            StartGameVillage.gameObject.SetActive(false);
+        }
+
         Buttons = GetComponentsInChildren<RealWorldButton>();
     }
 
     public void Activated()
     {
-        print("Activated menu");
+        if (DebugLog) print("Activated menu");
         StopAllCoroutines();
         gameObject.SetActive(true);
+        StartGameVillage.gameObject.SetActive(true);
+
 
         StartGameAnimator.SetBool("Enabled", true);
         StartGameVillage.Spawn();
@@ -45,8 +57,7 @@ public class MainMenu : MonoBehaviour
 
     public void Deactivated()
     {
-        //        if (!gameObject.activeSelf) return;
-        print("Deactivated menu");
+        if (DebugLog) print("Deactivated menu");
 
         StartGameAnimator.SetBool("Enabled", false);
         StartGameVillage.DestroyAnimation();
@@ -76,5 +87,12 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         callback();
+
     }
+
+//    void OnValidate()
+//    {
+//        print("OnValidate");
+//        print("DebugLog: " + DebugLog);
+//    }
 }

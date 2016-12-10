@@ -539,7 +539,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 407230}
-  - component: {fileID: 11450038}
   - component: {fileID: 5428746}
   - component: {fileID: 13693258}
   - component: {fileID: 8204390}
@@ -3750,7 +3749,6 @@ GameObject:
   - component: {fileID: 471124}
   - component: {fileID: 19820306}
   - component: {fileID: 19926816}
-  - component: {fileID: 11418512}
   m_Layer: 0
   m_Name: 
   m_TagString: Untagged
@@ -8064,7 +8062,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -8152,24 +8150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9070a6634d9edf4da6228558b35ec9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11418512
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 196432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89db709566c50f841a68cc9a55e308af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _inRange: 0
-  ActivationRange: 0.23
-  forwardDirections: []
-  smoothForward: 7
-  _parent: {fileID: 0}
-  _runner: {fileID: 0}
-  _particleSystem: {fileID: 0}
 --- !u!114 &11418514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8318,22 +8298,6 @@ MonoBehaviour:
   _setRotation: 1
   _setPosition: 1
   DebugLog: 0
---- !u!114 &11450038
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2368cea44202bf42b3223dad02cdd81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _xCenterOffsetThreshold: 0.2
-  _timeSpeedUp: 2
-  <JumpMultiplierValue>k__BackingField: 0
-  runner: {fileID: 0}
-  _runnerSpeed: 0
 --- !u!114 &11458216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12315,7 +12279,7 @@ ParticleSystemRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
