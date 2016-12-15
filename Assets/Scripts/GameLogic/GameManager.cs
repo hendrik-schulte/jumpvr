@@ -8,6 +8,7 @@ public class GameEvent : UnityEvent { }
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public bool DEBUG;
 
 
     public Text Text;
