@@ -8048,7 +8048,8 @@ MonoBehaviour:
   DEBUG: 1
   Text: {fileID: 889888472}
   Camera: {fileID: 0}
-  Village: {fileID: 0}
+  VillagePrefab: {fileID: 0}
+  GameModels: {fileID: 0}
   maxNumberVillages: 0
 --- !u!1 &950910440
 GameObject:

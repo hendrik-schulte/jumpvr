@@ -6,6 +6,7 @@ public class SchleuderScript : MonoBehaviour {
     public GameObject zahnrad;
     public GameObject geschossParent;
     public GameObject schleuderArm;
+    public Animator animator;
     public float forceScale;
     [Range(45, 90)]
     public float anglePlus;
@@ -31,7 +32,9 @@ public class SchleuderScript : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.L) || elapsedTime >= 5f)
         {
             elapsedTime = 0f;
-            shoot();
+            animator.SetTrigger("Fire");
+            Invoke("shoot", 0.5f);
+            //shoot();
         }
         
 
