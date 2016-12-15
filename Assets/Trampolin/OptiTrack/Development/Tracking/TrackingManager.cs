@@ -36,7 +36,9 @@ public abstract class TrackingManager : MonoBehaviour
         LeftElbow,
         RightElbow,
         LeftKnee,
-        RightKnee
+        RightKnee,
+        Balloon
+
     }
 
     protected List<TrackingJoint> _trackingJoints;
@@ -51,6 +53,7 @@ public abstract class TrackingManager : MonoBehaviour
     public TrackingJoint RightKnee { get; private set; }
     public TrackingJoint LeftElbow { get; private set; }
     public TrackingJoint RightElbow { get; private set; }
+    public TrackingJoint Balloon { get; private set; }
 
     private Dictionary<JointType, TrackingJoint> _typeToJointObj;
 
@@ -116,7 +119,8 @@ public abstract class TrackingManager : MonoBehaviour
         LeftElbow = _typeToJointObj[JointType.LeftElbow];
         RightElbow = _typeToJointObj[JointType.RightElbow];
         LeftKnee = _typeToJointObj[JointType.LeftKnee];
-        RightKnee = _typeToJointObj[JointType.RightKnee]; 
+        RightKnee = _typeToJointObj[JointType.RightKnee];
+        Balloon = _typeToJointObj[JointType.Balloon];
 
         SetAllJoints(_isTrackingActive);
     }

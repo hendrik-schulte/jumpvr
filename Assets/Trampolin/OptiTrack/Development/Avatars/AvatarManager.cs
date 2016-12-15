@@ -36,16 +36,28 @@ public class AvatarManager : MonoBehaviour
         FixedAnimations
     }
 
-    public Transform Camera { get; private set; }
-    public Transform Head { get; private set; }
-    public Transform RightHand { get; private set; }
-    public Transform RightFoot { get; private set; }
-    public Transform LeftHand { get; private set; }
-    public Transform LeftFoot { get; private set; }
-    public Transform RightElbow { get; private set; }
-    public Transform RightKnee { get; private set; }
-    public Transform LeftElbow { get; private set; }
-    public Transform LeftKnee { get; private set; }
+    [Header("Optitrack Joints")]
+    public Transform Camera;
+    public Transform Head;
+    public Transform RightHand;
+    public Transform RightFoot;
+    public Transform LeftHand;
+    public Transform LeftFoot;
+    public Transform RightElbow;
+    public Transform RightKnee;
+    public Transform LeftElbow;
+    public Transform LeftKnee;
+
+    //    public Transform Camera { get; private set; }
+    //    public Transform Head { get; private set; }
+    //    public Transform RightHand { get; private set; }
+    //    public Transform RightFoot { get; private set; }
+    //    public Transform LeftHand { get; private set; }
+    //    public Transform LeftFoot { get; private set; }
+    //    public Transform RightElbow { get; private set; }
+    //    public Transform RightKnee { get; private set; }
+    //    public Transform LeftElbow { get; private set; }
+    //    public Transform LeftKnee { get; private set; }
 
     private int _currentAvatarIndex;
     private Dictionary<AvatarType, VirtualAvatar> _avatars;
@@ -60,25 +72,23 @@ public class AvatarManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-
-//        DontDestroyOnLoad(transform.gameObject);
     }
 
     private void Start()
     {
 
-        Camera = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        if (!Camera) Camera = GameObject.FindGameObjectWithTag("MainCamera").transform;
 
         //add transforms from tracking
-        Head = TrackingManager.Instance.Head != null ? TrackingManager.Instance.Head.transform : null;
-        LeftFoot = TrackingManager.Instance.LeftFoot != null ? TrackingManager.Instance.LeftFoot.transform : null;
-        RightFoot = TrackingManager.Instance.RightFoot != null ? TrackingManager.Instance.RightFoot.transform : null;
-        LeftHand = TrackingManager.Instance.LeftHand != null ? TrackingManager.Instance.LeftHand.transform : null;
-        RightHand = TrackingManager.Instance.RightHand != null ? TrackingManager.Instance.RightHand.transform : null;
-        LeftKnee = TrackingManager.Instance.LeftKnee != null ? TrackingManager.Instance.LeftKnee.transform : null;
-        RightKnee = TrackingManager.Instance.RightKnee != null ? TrackingManager.Instance.RightKnee.transform : null;
-        LeftElbow = TrackingManager.Instance.LeftElbow != null ? TrackingManager.Instance.LeftElbow.transform : null;
-        RightElbow = TrackingManager.Instance.RightElbow != null ? TrackingManager.Instance.RightElbow.transform : null;
+        if (!Head) Head = TrackingManager.Instance.Head != null ? TrackingManager.Instance.Head.transform : null;
+        if (!LeftFoot) LeftFoot = TrackingManager.Instance.LeftFoot != null ? TrackingManager.Instance.LeftFoot.transform : null;
+        if (!RightFoot) RightFoot = TrackingManager.Instance.RightFoot != null ? TrackingManager.Instance.RightFoot.transform : null;
+        if (!LeftHand) LeftHand = TrackingManager.Instance.LeftHand != null ? TrackingManager.Instance.LeftHand.transform : null;
+        if (!RightHand) RightHand = TrackingManager.Instance.RightHand != null ? TrackingManager.Instance.RightHand.transform : null;
+        if (!LeftKnee) LeftKnee = TrackingManager.Instance.LeftKnee != null ? TrackingManager.Instance.LeftKnee.transform : null;
+        if (!RightKnee) RightKnee = TrackingManager.Instance.RightKnee != null ? TrackingManager.Instance.RightKnee.transform : null;
+        if (!LeftElbow) LeftElbow = TrackingManager.Instance.LeftElbow != null ? TrackingManager.Instance.LeftElbow.transform : null;
+        if (!RightElbow) RightElbow = TrackingManager.Instance.RightElbow != null ? TrackingManager.Instance.RightElbow.transform : null;
 
         //add all avatars from children to this list
         _avatars = new Dictionary<AvatarType, VirtualAvatar>();
@@ -95,7 +105,7 @@ public class AvatarManager : MonoBehaviour
 
         _scaleTransform = gameObject.GetComponent<ScaleTransform>();
 
-        
+
         SetPerspective();
         //StartCoroutine(SwitchPerspectives());
     }
@@ -126,7 +136,7 @@ public class AvatarManager : MonoBehaviour
 
     public void CalibrateAvatars(bool scale)
     {
-        if(scale)
+        if (scale)
             _scaleTransform.CalibrateScale();
 
         GetComponent<ApplySimpleDifference>().Calibrate();
@@ -146,7 +156,7 @@ public class AvatarManager : MonoBehaviour
     {
         _avatars[(AvatarType)_currentAvatarIndex].gameObject.SetActive(false);
         _currentAvatarIndex++;
-        _currentAvatarIndex = _currentAvatarIndex %_avatars.Count;
+        _currentAvatarIndex = _currentAvatarIndex % _avatars.Count;
         _avatars[(AvatarType)_currentAvatarIndex].gameObject.SetActive(true);
         SetMesh();
     }
@@ -182,7 +192,7 @@ public class AvatarManager : MonoBehaviour
     public void SetMesh()
     {
         //is it an avatar with body? 
-        if(_avatars[(AvatarType)_currentAvatarIndex].transform.FindChild("Body") != null)
+        if (_avatars[(AvatarType)_currentAvatarIndex].transform.FindChild("Body") != null)
         {
             //first person? headless mesh
             if (_currentPerspectiveIndex == 0)
@@ -202,7 +212,7 @@ public class AvatarManager : MonoBehaviour
     //changing var inspector, apply new perspective
     private void OnValidate()
     {
-        if(Application.isPlaying && Camera!=null)
+        if (Application.isPlaying && Camera != null)
         {
             SetPerspective(_currentPerspectiveIndex);
         }

@@ -48,8 +48,6 @@ public class JumpFeedback : MonoBehaviour
                 DesiredHeight = Mathf.Min(DesiredHeight, Mathf.Min(Col.transform.position.y + Offset, 0));
             }
 
-
-
             if (transform.position.y < DesiredHeight) transform.position = new Vector3(0, Mathf.Lerp(transform.position.y, DesiredHeight, UpSmoothness), 0);
             else transform.position = new Vector3(0, Mathf.Lerp(transform.position.y, DesiredHeight, DownSmoothness), 0);
 
