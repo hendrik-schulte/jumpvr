@@ -4,41 +4,49 @@ using System.Collections;
 public class SchleuderScript : MonoBehaviour {
 
     public GameObject zahnrad;
-    public Rigidbody geschoss;
-    public GameObject geschossStartPos;
+    public GameObject headTracker;
+    public GameObject geschossParent;
+    public GameObject schleuderArm;
     public float forceScale;
+    [Range(45, 90)]
+    public float anglePlus;
     Quaternion test;
 	Vector3 catToPlayer;
+    private float elapsedTime;
 
 	// Use this for initialization
 	void Start () {
-        
+        geschossParent.GetComponent<SteinScript>().setParent(true);
+        elapsedTime = 0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		catToPlayer = Camera.main.transform.position - transform.position;
+        elapsedTime += Time.deltaTime;
+		catToPlayer = headTracker.transform.position - transform.position;
 		catToPlayer.Set(catToPlayer.x, 0, catToPlayer.z);
             
         test = Quaternion.LookRotation(catToPlayer, Vector3.up);
-        zahnrad.transform.rotation = Quaternion.RotateTowards(zahnrad.transform.rotation, test, .5f);
+        zahnrad.transform.rotation = Quaternion.RotateTowards(zahnrad.transform.rotation, test, .7f);
 
-        if (Input.GetKeyUp(KeyCode.L))
+        if (Input.GetKeyUp(KeyCode.L) || elapsedTime >= 5f)
         {
+            elapsedTime = 0f;
             shoot();
         }
-        if (geschoss.transform.position.y < -1)
-        {
-            geschoss.isKinematic = true;
-            geschoss.transform.position = geschossStartPos.transform.position;
-        }
-		
-	}
+        
+
+    }
 
 	public void shoot(){
-        geschoss.isKinematic = false;
-        geschoss.AddForce(Vector3.Normalize(Camera.main.transform.position - geschoss.transform.position) * forceScale, ForceMode.Impulse);
+        GameObject geschoss = Instantiate<GameObject>(geschossParent, schleuderArm.transform);
+        geschoss.SetActive(true);
+        geschoss.GetComponent<Rigidbody>().isKinematic = false;
+
+        Vector3 shootVec = Quaternion.Euler(anglePlus, 0f, 0f) * zahnrad.transform.forward;
+
+        geschoss.GetComponent<Rigidbody>().AddForce(shootVec * forceScale, ForceMode.Impulse);
+        geschoss.transform.parent = null;
         
 	}
 }
