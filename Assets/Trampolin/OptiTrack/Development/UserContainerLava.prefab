@@ -8373,6 +8373,16 @@ MonoBehaviour:
   _currentPerspectiveIndex: 2
   AvatarMeshComplete: {fileID: 4300004, guid: b6cd7455f03870b4683011a1c616c576, type: 3}
   AvatarMeshHeadless: {fileID: 4300000, guid: 3214e8e24c7b4354bb23fee875897484, type: 3}
+  Camera: {fileID: 0}
+  Head: {fileID: 0}
+  RightHand: {fileID: 0}
+  RightFoot: {fileID: 0}
+  LeftHand: {fileID: 0}
+  LeftFoot: {fileID: 0}
+  RightElbow: {fileID: 0}
+  RightKnee: {fileID: 0}
+  LeftElbow: {fileID: 0}
+  LeftKnee: {fileID: 0}
 --- !u!114 &11477852
 MonoBehaviour:
   m_ObjectHideFlags: 1
