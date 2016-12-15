@@ -4,7 +4,6 @@ using System.Collections;
 public class SchleuderScript : MonoBehaviour {
 
     public GameObject zahnrad;
-    public GameObject headTracker;
     public GameObject geschossParent;
     public GameObject schleuderArm;
     public float forceScale;
@@ -23,7 +22,7 @@ public class SchleuderScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         elapsedTime += Time.deltaTime;
-		catToPlayer = headTracker.transform.position - transform.position;
+		catToPlayer = Camera.main.transform.position - transform.position;
 		catToPlayer.Set(catToPlayer.x, 0, catToPlayer.z);
             
         test = Quaternion.LookRotation(catToPlayer, Vector3.up);

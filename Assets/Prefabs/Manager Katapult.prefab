@@ -756,7 +756,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zahnrad: {fileID: 1000011649309860}
-  headTracker: {fileID: 0}
   geschossParent: {fileID: 1000012265017674}
   schleuderArm: {fileID: 1000012305781018}
   forceScale: 20
@@ -774,6 +773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animator: {fileID: 95000011600908664}
   ParticleSystem: {fileID: 198000012024886016}
+  AudioSource: {fileID: 0}
   ForceThreshold: 5
   IsLiving: 1
   DoNotDestroy: 0

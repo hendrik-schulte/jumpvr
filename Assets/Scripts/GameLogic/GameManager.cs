@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Events;
 
 public class GameEvent : UnityEvent { }
@@ -14,23 +15,16 @@ public class GameManager : MonoBehaviour
     public Text Text;
     public MainMenu MainMenu { get { return MainMenu.Instance; } }
     public GameObject Camera;
-    public GameObject Village;
+    public GameObject VillagePrefab;
+    public Transform GameModels;
 
     public int maxNumberVillages;
 
-    //0
-    static Vector3 posFront = new Vector3(0, 0, (float)0.5);
-    //1
-    static Vector3 posFrontRight = new Vector3((float)0.5, 0, (float)0.25);
-    //2
-    static Vector3 posBackRight = new Vector3((float)0.5, 0, (float)-0.25);
-    //3
-    static Vector3 posBack = new Vector3(0, 0, (float)-0.5);
-    //4
-    static Vector3 posBackLeft = new Vector3((float)-0.5, 0, (float)-0.25);
-    //5
-    static Vector3 posFrontLeft = new Vector3((float)-0.5, 0, (float)0.25);
-    bool[] spawned = new bool[] { false, false, false, false, false, false };
+
+    //bool[] spawned = new bool[] { false, false, false, false, false, false };
+    List<Vector3> villagesToSpawn = new List<Vector3>();
+    List<Vector3> villagesSpawned = new List<Vector3>();
+    List<GameObject> villageObjects = new List<GameObject>();
     bool gamePaused = false;
     bool maxNumberReached = false;
 
@@ -56,6 +50,36 @@ public class GameManager : MonoBehaviour
     {
         while (!gamePaused)
         {
+            if (!maxNumberReached)
+            {
+                int newVillage = (int)(Random.value * villagesToSpawn.Count);
+                Vector3 temp = villagesToSpawn[newVillage];
+                villagesSpawned.Add(villagesToSpawn[newVillage]);
+                villagesToSpawn.Remove(villagesToSpawn[newVillage]);
+                createVillage(temp);
+            }
+
+            if(villagesToSpawn.Count == 0)
+            {
+                maxNumberReached = true;
+            }
+
+
+            yield return new WaitForSeconds(5);
+        }
+        yield return null;
+    }
+
+    public void createVillage(Vector3 position)
+    {
+        var Village = Instantiate(VillagePrefab, position, Quaternion.identity, GameModels) as GameObject;
+        villageObjects.Add(Village);
+    }
+
+/*    IEnumerator Villages()
+    {
+        while (!gamePaused)
+        {
             bool noWait = false;
             if (!maxNumberReached)
             {
@@ -70,7 +94,7 @@ public class GameManager : MonoBehaviour
                         }
                         else
                         {
-                            Instantiate(Village, posFront, Quaternion.identity);
+                            Instantiate(Village, posFront, Quaternion.identity, GameModel);
                             spawned[newVillage] = true;
                         }
                         break;
@@ -81,7 +105,7 @@ public class GameManager : MonoBehaviour
                         }
                         else
                         {
-                            Instantiate(Village, posFrontRight, Quaternion.identity);
+                            Instantiate(Village, posFrontRight, Quaternion.identity, GameModel);
                             spawned[newVillage] = true;
                         }
                         break;
@@ -92,7 +116,7 @@ public class GameManager : MonoBehaviour
                         }
                         else
                         {
-                            Instantiate(Village, posBackRight, Quaternion.identity);
+                            Instantiate(Village, posBackRight, Quaternion.identity, GameModel);
                             spawned[newVillage] = true;
                         }
                         break;
@@ -103,7 +127,7 @@ public class GameManager : MonoBehaviour
                         }
                         else
                         {
-                            Instantiate(Village, posBack, Quaternion.identity);
+                            Instantiate(Village, posBack, Quaternion.identity, GameModel);
                             spawned[newVillage] = true;
                         }
                         break;
@@ -114,7 +138,7 @@ public class GameManager : MonoBehaviour
                         }
                         else
                         {
-                            Instantiate(Village, posBackLeft, Quaternion.identity);
+                            Instantiate(Village, posBackLeft, Quaternion.identity, GameModel);
                             spawned[newVillage] = true;
                         }
                         break;
@@ -125,7 +149,7 @@ public class GameManager : MonoBehaviour
                         }
                         else
                         {
-                            Instantiate(Village, posFrontLeft, Quaternion.identity);
+                            Instantiate(Village, posFrontLeft, Quaternion.identity, GameModel);
                             spawned[newVillage] = true;
                         }
                         break;
@@ -156,7 +180,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-    }
+    }*/
 
     public void CalibrationDone()
     {
@@ -178,9 +202,22 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         MainMenu.Deactivated();
-
+        
+        Vector3 posFront = new Vector3(0, 0, (float)0.5);
+        Vector3 posFrontRight = new Vector3((float)0.5, 0, (float)0.25);
+        Vector3 posBackRight = new Vector3((float)0.5, 0, (float)-0.25);
+        Vector3 posBack = new Vector3(0, 0, (float)-0.5);
+        Vector3 posBackLeft = new Vector3((float)-0.5, 0, (float)-0.25);
+        Vector3 posFrontLeft = new Vector3((float)-0.5, 0, (float)0.25);
+        villagesToSpawn.Add(posFront);
+        villagesToSpawn.Add(posFrontRight);
+        villagesToSpawn.Add(posBackRight);
+        villagesToSpawn.Add(posBack);
+        villagesToSpawn.Add(posBackLeft);
+        villagesToSpawn.Add(posFrontLeft);
         StartCoroutine(Villages());
     }
+
 
     public void Credits()
     {
