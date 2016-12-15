@@ -97,7 +97,7 @@ public class Destructible : MonoBehaviour, ForceReceiver
         DestroySound();
         OnDestroyEvent.Invoke();
 
-        if (!DoNotDestroy) Timer(2, delegate
+        if (!DoNotDestroy) Timer(3, delegate
           {
               //            ParticleSystem.Stop(true);
               //            ParticleSystem.Clear(true);
