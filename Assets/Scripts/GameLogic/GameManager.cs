@@ -182,6 +182,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Villages());
     }
 
+    public void Credits()
+    {
+        
+    }
+
     public void Blur()
     {
         CameraAnimator.SetTrigger("Blurry");

@@ -61,7 +61,7 @@ public class AvatarManager : MonoBehaviour
     {
         _instance = this;
 
-        DontDestroyOnLoad(transform.gameObject);
+//        DontDestroyOnLoad(transform.gameObject);
     }
 
     private void Start()
