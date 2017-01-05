@@ -35,11 +35,12 @@ public class Destructible : MonoBehaviour, ForceReceiver
 
     public Destructible()
     {
-        OnDestroyEvent = new GameEvent();
     }
 
     void Awake()
     {
+        OnDestroyEvent = new GameEvent();
+
         if (!Animator) Animator = GetComponent<Animator>();
         if (!AudioSource) AudioSource = GetComponent<AudioSource>();
     }

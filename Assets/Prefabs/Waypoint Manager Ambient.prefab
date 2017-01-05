@@ -1074,7 +1074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_agentPrefab: {fileID: 1169944161676452, guid: 9da01a5ebdb84d647ad5b89f166e0b80,
     type: 2}
-  m_amountToSpawn: 40
+  m_amountToSpawn: 100
   spawnInterval: 0.5
   m_spawnPoint: {fileID: 4162341938389820}
   m_infinite: 0

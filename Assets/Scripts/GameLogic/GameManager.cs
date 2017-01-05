@@ -29,13 +29,22 @@ public class GameManager : MonoBehaviour
     public bool DEBUG;
 
 
-    public Text Text;
-    public MainMenu MainMenu { get { return MainMenu.Instance; } }
-    public GameObject Camera;
-    public GameObject VillagePrefab;
-    public GameObject CatapultPrefab;
-    public Transform GameModels;
-    public Transform BottomModels;
+    [SerializeField]
+    private Text Text;
+    [SerializeField]
+    private MainMenu MainMenu { get { return MainMenu.Instance; } }
+    [SerializeField]
+    private GameObject Camera;
+    [SerializeField]
+    private GameObject VillagePrefab;
+    [SerializeField]
+    private GameObject CatapultPrefab;
+    [SerializeField]
+    private Transform GameModels;
+    [SerializeField]
+    private Transform BottomModels;
+    [SerializeField]
+    private GameObject WaypointManager; 
 
     public int maxNumberVillages;
 
@@ -105,6 +114,7 @@ public class GameManager : MonoBehaviour
     public void createBuilding(BuildingSite site, GameObject prefab)
     {
         var Village = Instantiate(prefab, site.Position, Quaternion.LookRotation(site.Position), BottomModels).GetComponent<Destructible>();
+        Village.transform.localPosition = new Vector3(Village.transform.localPosition.x , 0, Village.transform.localPosition.z);
         villageObjects.Add(Village);
         Village.AddOnDestroyListener(delegate ()
         {
@@ -134,7 +144,9 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         MainMenu.Deactivated();
-        
+
+        WaypointManager.SetActive(false);
+
         StartCoroutine(Villages());
     }
 
@@ -154,5 +166,7 @@ public class GameManager : MonoBehaviour
         gamePaused = true;
 
         MainMenu.Activated();
+
+        WaypointManager.SetActive(false);
     }
 }
