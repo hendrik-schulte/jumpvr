@@ -93,7 +93,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000011649309860
 GameObject:
   m_ObjectHideFlags: 1
@@ -384,7 +384,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012317341636}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.491, y: -0.00033332076, z: 0.27}
+  m_LocalPosition: {x: -0.0006288147, y: -0.00033332076, z: 0.5542562}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000011301557912}
@@ -858,8 +858,29 @@ MonoBehaviour:
   geschossParent: {fileID: 1000012265017674}
   schleuderArm: {fileID: 1000012305781018}
   animator: {fileID: 95828107819480096}
+  trollKopf: {fileID: 0}
+  katapult: {fileID: 1000010475528706}
+  maxTimeUntilShoot: 10
   forceScale: 20
   anglePlus: 70
+  shootProbability:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 10
+      value: 1
+      inSlope: 0.31541222
+      outSlope: 0.31541222
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114000010542969452
 MonoBehaviour:
   m_ObjectHideFlags: 1
