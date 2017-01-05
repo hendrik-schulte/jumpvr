@@ -3,12 +3,29 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using System;
 
 public class GameEvent : UnityEvent { }
 
 public class GameManager : MonoBehaviour
 {
+    [Serializable]
+    public class BuildingSite
+    {
+        public BuildingSite(Vector3 position)
+        {
+            Position = position;
+        }
+
+        public Vector3 Position; 
+    }
+
     public static GameManager Instance;
+
+    [SerializeField]
+    [Range(0.1f, 10)]
+    private float UpdateInterval = 5;
+
     public bool DEBUG;
 
 
@@ -16,23 +33,37 @@ public class GameManager : MonoBehaviour
     public MainMenu MainMenu { get { return MainMenu.Instance; } }
     public GameObject Camera;
     public GameObject VillagePrefab;
+    public GameObject CatapultPrefab;
     public Transform GameModels;
+    public Transform BottomModels;
 
     public int maxNumberVillages;
 
 
     //bool[] spawned = new bool[] { false, false, false, false, false, false };
-    List<Vector3> villagesToSpawn = new List<Vector3>();
-    List<Vector3> villagesSpawned = new List<Vector3>();
-    List<GameObject> villageObjects = new List<GameObject>();
+    List<BuildingSite> villagesToSpawn = new List<BuildingSite>();
+    List<BuildingSite> villagesSpawned = new List<BuildingSite>();
+    List<Destructible> villageObjects = new List<Destructible>();
     bool gamePaused = false;
-    bool maxNumberReached = false;
 
     private Animator CameraAnimator;
 
     void Awake()
     {
         if (!Instance) Instance = this;
+
+        Vector3 posFront = new Vector3(0, 0, (float)0.5);
+        Vector3 posFrontRight = new Vector3((float)0.5, 0, (float)0.25);
+        Vector3 posBackRight = new Vector3((float)0.5, 0, (float)-0.25);
+        Vector3 posBack = new Vector3(0, 0, (float)-0.5);
+        Vector3 posBackLeft = new Vector3((float)-0.5, 0, (float)-0.25);
+        Vector3 posFrontLeft = new Vector3((float)-0.5, 0, (float)0.25);
+        villagesToSpawn.Add(new BuildingSite(posFront));
+        villagesToSpawn.Add(new BuildingSite(posFrontRight));
+        villagesToSpawn.Add(new BuildingSite(posBackRight));
+        villagesToSpawn.Add(new BuildingSite(posBack));
+        villagesToSpawn.Add(new BuildingSite(posBackLeft));
+        villagesToSpawn.Add(new BuildingSite(posFrontLeft));
     }
 
     void Start()
@@ -48,139 +79,40 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Villages()
     {
+        yield return new WaitForSeconds(1.5f);
+
         while (!gamePaused)
         {
-            if (!maxNumberReached)
+
+            if (villagesToSpawn.Count != 0)
             {
-                int newVillage = (int)(Random.value * villagesToSpawn.Count);
-                Vector3 temp = villagesToSpawn[newVillage];
+                int newVillage = (int)(UnityEngine.Random.value * villagesToSpawn.Count);
+                var temp = villagesToSpawn[newVillage];
                 villagesSpawned.Add(villagesToSpawn[newVillage]);
                 villagesToSpawn.Remove(villagesToSpawn[newVillage]);
-                createVillage(temp);
+
+
+                if(UnityEngine.Random.Range(0f,1f) < 0.75) createBuilding(temp, VillagePrefab);
+                else createBuilding(temp, CatapultPrefab);
             }
 
-            if(villagesToSpawn.Count == 0)
-            {
-                maxNumberReached = true;
-            }
 
 
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(UpdateInterval);
         }
-        yield return null;
     }
 
-    public void createVillage(Vector3 position)
+    public void createBuilding(BuildingSite site, GameObject prefab)
     {
-        var Village = Instantiate(VillagePrefab, position, Quaternion.identity, GameModels) as GameObject;
+        var Village = Instantiate(prefab, site.Position, Quaternion.LookRotation(site.Position), BottomModels).GetComponent<Destructible>();
         villageObjects.Add(Village);
-    }
-
-/*    IEnumerator Villages()
-    {
-        while (!gamePaused)
+        Village.AddOnDestroyListener(delegate ()
         {
-            bool noWait = false;
-            if (!maxNumberReached)
-            {
-                //random neue Village setzen
-                int newVillage = (int)(Random.value * 5);
-                switch (newVillage)
-                {
-                    case 0:
-                        if (spawned[newVillage] == true)
-                        {
-                            noWait = true;
-                        }
-                        else
-                        {
-                            Instantiate(Village, posFront, Quaternion.identity, GameModel);
-                            spawned[newVillage] = true;
-                        }
-                        break;
-                    case 1:
-                        if (spawned[newVillage] == true)
-                        {
-                            noWait = true;
-                        }
-                        else
-                        {
-                            Instantiate(Village, posFrontRight, Quaternion.identity, GameModel);
-                            spawned[newVillage] = true;
-                        }
-                        break;
-                    case 2:
-                        if (spawned[newVillage] == true)
-                        {
-                            noWait = true;
-                        }
-                        else
-                        {
-                            Instantiate(Village, posBackRight, Quaternion.identity, GameModel);
-                            spawned[newVillage] = true;
-                        }
-                        break;
-                    case 3:
-                        if (spawned[newVillage] == true)
-                        {
-                            noWait = true;
-                        }
-                        else
-                        {
-                            Instantiate(Village, posBack, Quaternion.identity, GameModel);
-                            spawned[newVillage] = true;
-                        }
-                        break;
-                    case 4:
-                        if (spawned[newVillage] == true)
-                        {
-                            noWait = true;
-                        }
-                        else
-                        {
-                            Instantiate(Village, posBackLeft, Quaternion.identity, GameModel);
-                            spawned[newVillage] = true;
-                        }
-                        break;
-                    case 5:
-                        if (spawned[newVillage] == true)
-                        {
-                            noWait = true;
-                        }
-                        else
-                        {
-                            Instantiate(Village, posFrontLeft, Quaternion.identity, GameModel);
-                            spawned[newVillage] = true;
-                        }
-                        break;
-                }
-            }
-            //Array auszählen
-            for (int i = 0; i < spawned.Length; i++)
-            {
-                int count = 0;
-                if (spawned[i] == true)
-                {
-                    count++;
-                }
-                if (count >= maxNumberVillages)
-                {
-                    maxNumberReached = true;
-                    Debug.Log("Maximum Number of Villages Reached");
-                }
-            }
-            //Wartezeit zwischen neuen Dörfern
-            if (!noWait)
-            {
-                yield return new WaitForSeconds(10);
-            }
-            else
-            {
-                yield return null;
-            }
-        }
-
-    }*/
+            villageObjects.Remove(Village);
+            villagesToSpawn.Add(site);
+            villagesSpawned.Remove(site);
+        });
+    }
 
     public void CalibrationDone()
     {
@@ -203,18 +135,6 @@ public class GameManager : MonoBehaviour
     {
         MainMenu.Deactivated();
         
-        Vector3 posFront = new Vector3(0, 0, (float)0.5);
-        Vector3 posFrontRight = new Vector3((float)0.5, 0, (float)0.25);
-        Vector3 posBackRight = new Vector3((float)0.5, 0, (float)-0.25);
-        Vector3 posBack = new Vector3(0, 0, (float)-0.5);
-        Vector3 posBackLeft = new Vector3((float)-0.5, 0, (float)-0.25);
-        Vector3 posFrontLeft = new Vector3((float)-0.5, 0, (float)0.25);
-        villagesToSpawn.Add(posFront);
-        villagesToSpawn.Add(posFrontRight);
-        villagesToSpawn.Add(posBackRight);
-        villagesToSpawn.Add(posBack);
-        villagesToSpawn.Add(posBackLeft);
-        villagesToSpawn.Add(posFrontLeft);
         StartCoroutine(Villages());
     }
 
