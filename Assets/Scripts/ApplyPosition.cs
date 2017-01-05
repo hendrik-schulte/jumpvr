@@ -5,7 +5,8 @@ using UnityEngine;
 public class ApplyPosition : MonoBehaviour
 {
     public Transform TargetTransform;
-
+    [Range(0,1)]
+    public float Smoothness = 0.2f;
 
     void OnEnable()
     {
@@ -16,7 +17,7 @@ public class ApplyPosition : MonoBehaviour
     {
         while (true)
         {
-            transform.position = TargetTransform.position - new Vector3(0, 0.25f, 0);
+            transform.position = Vector3.Lerp(transform.position, TargetTransform.position - new Vector3(0, 0.25f, 0), Smoothness);
 
             yield return null;
         }

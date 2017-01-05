@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
             Position = position;
         }
 
-        public Vector3 Position; 
+        public Vector3 Position;
     }
 
     public static GameManager Instance;
@@ -44,7 +44,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Transform BottomModels;
     [SerializeField]
-    private GameObject WaypointManager; 
+    private GameObject WaypointManager;
+    
+    public Transform HeadTrackerPosition;
 
     public int maxNumberVillages;
 
@@ -93,7 +95,7 @@ public class GameManager : MonoBehaviour
         while (!gamePaused)
         {
 
-            if (villagesToSpawn.Count != 0)
+            if (villagesToSpawn.Count > 0)
             {
                 int newVillage = (int)(UnityEngine.Random.value * villagesToSpawn.Count);
                 var temp = villagesToSpawn[newVillage];
@@ -101,12 +103,12 @@ public class GameManager : MonoBehaviour
                 villagesToSpawn.Remove(villagesToSpawn[newVillage]);
 
 
-                if(UnityEngine.Random.Range(0f,1f) < 0.75) createBuilding(temp, VillagePrefab);
+                if (UnityEngine.Random.Range(0f, 1f) < 0.75) createBuilding(temp, VillagePrefab);
                 else createBuilding(temp, CatapultPrefab);
+
             }
 
-
-
+            
             yield return new WaitForSeconds(UpdateInterval);
         }
     }
@@ -114,15 +116,20 @@ public class GameManager : MonoBehaviour
     public void createBuilding(BuildingSite site, GameObject prefab)
     {
         var Village = Instantiate(prefab, site.Position, Quaternion.LookRotation(site.Position), BottomModels).GetComponent<Destructible>();
-        Village.transform.localPosition = new Vector3(Village.transform.localPosition.x , 0, Village.transform.localPosition.z);
+        Village.transform.localPosition = new Vector3(Village.transform.localPosition.x, 0, Village.transform.localPosition.z);
         villageObjects.Add(Village);
         Village.AddOnDestroyListener(delegate ()
         {
             villageObjects.Remove(Village);
-            villagesToSpawn.Add(site);
-            villagesSpawned.Remove(site);
+
+            Timer(2, delegate
+            {
+                villagesToSpawn.Add(site);
+                villagesSpawned.Remove(site);
+            });
         });
     }
+
 
     public void CalibrationDone()
     {
@@ -153,7 +160,7 @@ public class GameManager : MonoBehaviour
 
     public void Credits()
     {
-        
+
     }
 
     public void Blur()
@@ -168,5 +175,17 @@ public class GameManager : MonoBehaviour
         MainMenu.Activated();
 
         WaypointManager.SetActive(false);
+    }
+
+    private void Timer(float time, UnityAction action)
+    {
+        StartCoroutine(TimerCR(time, action));
+    }
+
+    IEnumerator TimerCR(float time, UnityAction action)
+    {
+        yield return new WaitForSeconds(time);
+
+        action();
     }
 }

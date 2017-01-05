@@ -8,7 +8,7 @@ public class SchleuderScript : MonoBehaviour {
     public GameObject geschossParent;
     public GameObject schleuderArm;
     public Animator animator;
-    public GameObject trollKopf;
+//    public GameObject trollKopf;
     public GameObject katapult;
 
     [Header("Variables for shooting")]
@@ -40,7 +40,7 @@ public class SchleuderScript : MonoBehaviour {
             elapsedTime = maxTimeUntilShoot;
         }
 
-		catToPlayer = trollKopf.transform.position - transform.position;
+		catToPlayer = GameManager.Instance.HeadTrackerPosition.position - transform.position;
 		catToPlayer.Set(catToPlayer.x, 0, catToPlayer.z);
             
         rotation = Quaternion.LookRotation(catToPlayer, Vector3.up);
@@ -48,7 +48,7 @@ public class SchleuderScript : MonoBehaviour {
 
         if (canShoot && Mathf.Abs(Vector3.Angle(zahnrad.transform.forward, catToPlayer)) < 20f)
         {
-            print(shootProbability.Evaluate(elapsedTime));
+//            print(shootProbability.Evaluate(elapsedTime));
             if (Random.value <= shootProbability.Evaluate(elapsedTime))
             {
                 canShoot = false;

@@ -7251,7 +7251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5f98519780eb8c4fb171776b928f0bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _useJoint: 0000000001000000030000000400000002000000
+  _useJoint: 000000000100000003000000040000000200000009000000
   _isTrackingActive: 1
   _framerateLocked: 1
 --- !u!1 &889888471
@@ -14166,11 +14166,6 @@ Transform:
   m_Father: {fileID: 344107017}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1620135102 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1418475637785888, guid: 4c069d62280758a4ea9121421bc0ad0b,
-    type: 2}
-  m_PrefabInternal: {fileID: 1127355162}
 --- !u!1 &1625563763
 GameObject:
   m_ObjectHideFlags: 0
@@ -14717,7 +14712,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1682426718}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43884587f6f48be46a1339a9353be66d, type: 3}
   m_Name: 
@@ -18021,30 +18016,9 @@ Prefab:
       objectReference: {fileID: 889888472}
     - target: {fileID: 114000011916370820, guid: 003339b6410c9574b82bca8a60211659,
         type: 2}
-      propertyPath: MainMenu
-      value: 
-      objectReference: {fileID: 1620135102}
-    - target: {fileID: 114000011916370820, guid: 003339b6410c9574b82bca8a60211659,
-        type: 2}
       propertyPath: Camera
       value: 
       objectReference: {fileID: 24024257}
-    - target: {fileID: 114000011916370820, guid: 003339b6410c9574b82bca8a60211659,
-        type: 2}
-      propertyPath: maxNumberVillages
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011916370820, guid: 003339b6410c9574b82bca8a60211659,
-        type: 2}
-      propertyPath: VillagePrefab
-      value: 
-      objectReference: {fileID: 1000010420676738, guid: 5b65eeb0c74ac5d498b2928af578f74f,
-        type: 2}
-    - target: {fileID: 114000011916370820, guid: 003339b6410c9574b82bca8a60211659,
-        type: 2}
-      propertyPath: BottomModels
-      value: 
-      objectReference: {fileID: 2010444231}
     - target: {fileID: 114000011916370820, guid: 003339b6410c9574b82bca8a60211659,
         type: 2}
       propertyPath: GameModels
@@ -18052,15 +18026,19 @@ Prefab:
       objectReference: {fileID: 1161284827}
     - target: {fileID: 114000011916370820, guid: 003339b6410c9574b82bca8a60211659,
         type: 2}
-      propertyPath: CatapultPrefab
+      propertyPath: BottomModels
       value: 
-      objectReference: {fileID: 1000012317341636, guid: 3e3d2da175f124541a2459fa0b29abb6,
-        type: 2}
+      objectReference: {fileID: 2010444231}
     - target: {fileID: 114000011916370820, guid: 003339b6410c9574b82bca8a60211659,
         type: 2}
       propertyPath: WaypointManager
       value: 
       objectReference: {fileID: 1095337401}
+    - target: {fileID: 114000011916370820, guid: 003339b6410c9574b82bca8a60211659,
+        type: 2}
+      propertyPath: HeadTrackerPosition
+      value: 
+      objectReference: {fileID: 1371453651}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 003339b6410c9574b82bca8a60211659, type: 2}
   m_IsPrefabParent: 0
@@ -18820,10 +18798,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 1.8
+  m_Radius: 0.22
+  m_Height: 1.31
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!54 &2035844861
 Rigidbody:
   m_ObjectHideFlags: 0
