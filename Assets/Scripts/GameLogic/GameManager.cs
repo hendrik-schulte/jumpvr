@@ -45,7 +45,9 @@ public class GameManager : MonoBehaviour
     private Transform BottomModels;
     [SerializeField]
     private GameObject WaypointManager;
-    
+    [SerializeField]
+    private Transform BuildingSites;
+
     public Transform HeadTrackerPosition;
 
     public int maxNumberVillages;
@@ -63,18 +65,11 @@ public class GameManager : MonoBehaviour
     {
         if (!Instance) Instance = this;
 
-        Vector3 posFront = new Vector3(0, 0, (float)0.5);
-        Vector3 posFrontRight = new Vector3((float)0.5, 0, (float)0.25);
-        Vector3 posBackRight = new Vector3((float)0.5, 0, (float)-0.25);
-        Vector3 posBack = new Vector3(0, 0, (float)-0.5);
-        Vector3 posBackLeft = new Vector3((float)-0.5, 0, (float)-0.25);
-        Vector3 posFrontLeft = new Vector3((float)-0.5, 0, (float)0.25);
-        villagesToSpawn.Add(new BuildingSite(posFront));
-        villagesToSpawn.Add(new BuildingSite(posFrontRight));
-        villagesToSpawn.Add(new BuildingSite(posBackRight));
-        villagesToSpawn.Add(new BuildingSite(posBack));
-        villagesToSpawn.Add(new BuildingSite(posBackLeft));
-        villagesToSpawn.Add(new BuildingSite(posFrontLeft));
+        foreach (var Transform in BuildingSites.GetComponentsInChildren<Transform>())
+        {
+            if(Transform == BuildingSites.transform) continue;
+            villagesToSpawn.Add(new BuildingSite(Transform.position));
+        }
     }
 
     void Start()
@@ -152,7 +147,7 @@ public class GameManager : MonoBehaviour
     {
         MainMenu.Deactivated();
 
-        WaypointManager.SetActive(false);
+        WaypointManager.SetActive(true);
 
         StartCoroutine(Villages());
     }

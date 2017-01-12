@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4746272488232722}
   - component: {fileID: 33730311451157558}
   - component: {fileID: 23135478931589026}
+  - component: {fileID: 114770328512385070}
   m_Layer: 0
   m_Name: geo_FarIslandA
   m_TagString: Untagged
@@ -48,7 +49,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1505487018592786}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -82,3 +83,16 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1505487018592786}
   m_Mesh: {fileID: 4300002, guid: aeb6068915b991c45852cb40a1791b9f, type: 3}
+--- !u!114 &114770328512385070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1505487018592786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae06bf30ff7d7ae4f93d1e79ca17d946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 0.46
+  ScaleBased: 1

@@ -6,12 +6,12 @@ public class HeadCollision : MonoBehaviour
     public LayerMask BlurLayers;
 
 
-    void OnTriggerEnter(Collider collider)
+    void OnCollisionEnter(Collision collision)
     {
-        if (BlurLayers.ContainsLayer(collider.gameObject.layer))
+        if (BlurLayers.ContainsLayer(collision.collider.gameObject.layer))
         {
             GameManager.Instance.Blur();
-            Destroy(collider.gameObject);
+            Destroy(collision.collider.gameObject);
         }
     }
 }

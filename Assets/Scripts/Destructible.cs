@@ -31,16 +31,10 @@ public class Destructible : MonoBehaviour, ForceReceiver
     [SerializeField]
     private bool DebugKeys;
 
-    private GameEvent OnDestroyEvent;
-
-    public Destructible()
-    {
-    }
+    private GameEvent OnDestroyEvent = new GameEvent();
 
     void Awake()
     {
-        OnDestroyEvent = new GameEvent();
-
         if (!Animator) Animator = GetComponent<Animator>();
         if (!AudioSource) AudioSource = GetComponent<AudioSource>();
     }

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4417606337003918}
   - component: {fileID: 33887713951297546}
   - component: {fileID: 23262130519254032}
+  - component: {fileID: 114250652718404362}
   m_Layer: 0
   m_Name: CloudE
   m_TagString: Untagged
@@ -79,3 +80,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1779552181840642}
   m_Mesh: {fileID: 4300000, guid: 757b9e9201fd8cf46af8325f9a81ccd6, type: 3}
+--- !u!114 &114250652718404362
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1779552181840642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae06bf30ff7d7ae4f93d1e79ca17d946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 0.46
