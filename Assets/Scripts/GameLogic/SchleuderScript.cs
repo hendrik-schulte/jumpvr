@@ -13,6 +13,7 @@ public class SchleuderScript : MonoBehaviour {
 
     [Header("Variables for shooting")]
     public float maxTimeUntilShoot;
+    public float tryToShootEverery;
     public float forceScale;
     [Range(45, 90)]
     public float anglePlus;
@@ -22,41 +23,49 @@ public class SchleuderScript : MonoBehaviour {
 	Vector3 catToPlayer;
     private float elapsedTime;
     private bool canShoot;
+    private float elapsedTimeTillPoll;
 
     // Use this for initialization
     void Start () {
         geschossParent.GetComponent<SteinScript>().setParent(true);
         elapsedTime = 0f;
         canShoot = true;
-	}
+        elapsedTimeTillPoll = 0f;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
         elapsedTime += Time.deltaTime;
-        
+        elapsedTimeTillPoll += Time.deltaTime;
 
         if (elapsedTime >= maxTimeUntilShoot)
         {
             elapsedTime = maxTimeUntilShoot;
         }
+        catToPlayer = GameManager.Instance.HeadTrackerPosition.position - transform.position;
+        catToPlayer.Set(catToPlayer.x, 0, catToPlayer.z);
 
-		catToPlayer = GameManager.Instance.HeadTrackerPosition.position - transform.position;
-		catToPlayer.Set(catToPlayer.x, 0, catToPlayer.z);
-            
         rotation = Quaternion.LookRotation(catToPlayer, Vector3.up);
         zahnrad.transform.rotation = Quaternion.RotateTowards(zahnrad.transform.rotation, rotation, .7f);
-
-        if (canShoot && Mathf.Abs(Vector3.Angle(zahnrad.transform.forward, catToPlayer)) < 20f)
+        if (elapsedTimeTillPoll >= tryToShootEverery)
         {
-//            print(shootProbability.Evaluate(elapsedTime));
-            if (Random.value <= shootProbability.Evaluate(elapsedTime))
+            elapsedTimeTillPoll = 0f;
+            
+
+            if (canShoot && Mathf.Abs(Vector3.Angle(zahnrad.transform.forward, catToPlayer)) < 20f)
             {
-                canShoot = false;
-                elapsedTime = 0f;
-                animator.SetTrigger("Fire");
-                Invoke("shoot", 0.3f);
-                //shoot();
+                //            print(shootProbability.Evaluate(elapsedTime));
+                if (Random.value <= shootProbability.Evaluate(elapsedTime))
+                {
+                    canShoot = false;
+                    elapsedTime = 0f;
+                    animator.SetTrigger("Fire");
+                    Invoke("shoot", 0.3f);
+                    //shoot();
+                }
             }
+		
         }else if (Input.GetKeyUp(KeyCode.L))
         {
             canShoot = false;
