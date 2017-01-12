@@ -858,9 +858,9 @@ MonoBehaviour:
   geschossParent: {fileID: 1000012265017674}
   schleuderArm: {fileID: 1000012305781018}
   animator: {fileID: 95828107819480096}
-  trollKopf: {fileID: 0}
   katapult: {fileID: 1000010475528706}
-  maxTimeUntilShoot: 10
+  maxTimeUntilShoot: 6
+  tryToShootEverery: 1
   forceScale: 20
   anglePlus: 70
   shootProbability:
@@ -873,10 +873,10 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 10
+      time: 6
       value: 1
-      inSlope: 0.31541222
-      outSlope: 0.31541222
+      inSlope: 0.23517814
+      outSlope: 0.23517814
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
