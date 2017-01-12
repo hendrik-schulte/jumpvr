@@ -32,7 +32,7 @@ public class ForceApplicator : MonoBehaviour
 
     void Start()
     {
-        PreviousPosition = transform.localPosition;
+        PreviousPosition = transform.position;
     }
 
     void Update()
@@ -43,10 +43,10 @@ public class ForceApplicator : MonoBehaviour
 
     void UpdateVelocity()
     {
-        RelativePositions.Insert(0, transform.localPosition - PreviousPosition);
+        RelativePositions.Insert(0, transform.position - PreviousPosition);
         TimeSteps.Insert(0, Time.deltaTime);
 
-        PreviousPosition = transform.localPosition;
+        PreviousPosition = transform.position;
 
         while (RelativePositions.Count > SpeedDepth)
         {
@@ -75,7 +75,7 @@ public class ForceApplicator : MonoBehaviour
         if (receiver != null) receiver.OnHit(Velocity);
 
 
-//        print("Hit with force: " + Velocity + " magnitude: " + Velocity.magnitude);
+        print("Hit with force: " + Velocity + " magnitude: " + Velocity.magnitude);
 
 //        Debug.
 

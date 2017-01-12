@@ -1529,7 +1529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_agentPrefab: {fileID: 1169944161676452, guid: 9da01a5ebdb84d647ad5b89f166e0b80,
     type: 2}
-  m_amountToSpawn: 20
+  m_amountToSpawn: 10
   spawnInterval: 1
   m_spawnPoint: {fileID: 4092713485713934}
   m_infinite: 0

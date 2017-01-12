@@ -45,7 +45,7 @@ public class Destructible : MonoBehaviour, ForceReceiver
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            DestroyVillage();
+            DestroyBuilding();
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -80,10 +80,10 @@ public class Destructible : MonoBehaviour, ForceReceiver
 
     public void OnHit(Vector3 impulse)
     {
-        if (impulse.magnitude >= ForceThreshold) DestroyVillage(); ;
+        if (impulse.magnitude >= ForceThreshold) DestroyBuilding(); ;
     }
 
-    void DestroyVillage()
+    public void DestroyBuilding()
     {
         if (!IsLiving) return;
 

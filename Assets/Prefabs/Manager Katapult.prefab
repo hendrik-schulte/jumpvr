@@ -895,7 +895,7 @@ MonoBehaviour:
   Animator: {fileID: 95000011600908664}
   ParticleSystem: {fileID: 198000012024886016}
   AudioSource: {fileID: 0}
-  ForceThreshold: 5
+  ForceThreshold: 3
   IsLiving: 1
   DoNotDestroy: 0
   DebugKeys: 0

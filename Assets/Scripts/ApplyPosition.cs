@@ -17,7 +17,7 @@ public class ApplyPosition : MonoBehaviour
     {
         while (true)
         {
-            transform.position = Vector3.Lerp(transform.position, TargetTransform.position - new Vector3(0, 0.25f, 0), Smoothness);
+            transform.position = Vector3.Lerp(transform.position, TargetTransform.position - new Vector3(0, 0, 0), Smoothness);
 
             yield return null;
         }

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameEvent : UnityEvent { }
 
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour
 
         SwipeDetectorGear.Instance.AddSwipeTopListener(Recalibrate);
         SwipeDetectorGear.Instance.AddSwipeLeftListener(ExitToMenu);
+        SwipeDetectorGear.Instance.AddSwipeRightListener(Restart);
         MainMenu.AddStartGameListener(StartGame);
 
         //		StartCoroutine("Villages");
@@ -105,6 +107,14 @@ public class GameManager : MonoBehaviour
 
             
             yield return new WaitForSeconds(UpdateInterval);
+        }
+    }
+
+    private void ResetGame()
+    {
+        foreach (var building in villageObjects)
+        {
+            building.DestroyBuilding();
         }
     }
 
@@ -136,6 +146,11 @@ public class GameManager : MonoBehaviour
         MainMenu.Deactivated();
 
         Trampolin.Instance.Recalibrate();
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void CloseMenu()
@@ -170,6 +185,7 @@ public class GameManager : MonoBehaviour
         MainMenu.Activated();
 
         WaypointManager.SetActive(false);
+        ResetGame();
     }
 
     private void Timer(float time, UnityAction action)
