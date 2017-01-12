@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 626343943}
-  m_IndirectSpecularColor: {r: 0.36202705, g: 0.5659631, b: 0.67672735, a: 1}
+  m_IndirectSpecularColor: {r: 0.3616331, g: 0.5663518, b: 0.6765162, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -12271,6 +12271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {fileID: 1682426719}
+  Smoothness: 0.2
 --- !u!4 &1363707049 stripped
 Transform:
   m_PrefabParentObject: {fileID: 465540, guid: cd544d3f7e2177f48aa38a0c28b580af, type: 2}
@@ -19047,11 +19048,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Collider: {fileID: 2055362295}
-  Prefab: {fileID: 4562117187359342, guid: 5685b2aa4f9390940bb84cf6efca3c89, type: 2}
-  Amount: 24
-  MinDistance: 4.6
-  MinScale: 0.58
-  MaxScale: 1.1
+  Prefabs:
+  - {fileID: 4207696165865630, guid: 4edfe77aff72c364da8d240b4463e339, type: 2}
+  - {fileID: 4198169383922530, guid: a53ed3371b2076c479282ee67e2a63b9, type: 2}
+  - {fileID: 4317855146856254, guid: 9ae5e46266fc4464a94629784f6b835d, type: 2}
+  - {fileID: 4398874984617050, guid: fdb1e4a62754901439be9cbcee3fc19f, type: 2}
+  - {fileID: 4417606337003918, guid: 30c49f9ed33750646bb852ca9678e29b, type: 2}
+  - {fileID: 4204794965891782, guid: dc6be860c0d60b9409b83660e27a9f03, type: 2}
+  - {fileID: 4346688323200736, guid: ca958c671d761674aa7b5343dc673a4b, type: 2}
+  Amount: 35
+  MinDistance: 2.4
+  MinScale: 1.13
+  MaxScale: 3.82
 --- !u!135 &2055362295
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class Initializer : MonoBehaviour
     private SphereCollider Collider;
 
     [SerializeField]
-    private Transform Prefab;
+    private Transform[] Prefabs;
 
     [SerializeField]
     [Range(0, 200)]
@@ -33,26 +33,20 @@ public class Initializer : MonoBehaviour
     private void InsideCircle(int Amount)
     {
         var i = 0;
-        var Spread = Collider.radius * transform.lossyScale.x;
+        var Spread = Collider.radius * transform.lossyScale.x - MinDistance;
 
-        if (Spread < MinDistance) return;
+        if (Spread < 0) return;
 
 
         while (i < Amount)
         {
-            var randomPos = Vector3.zero;
+            Vector3 randDir = Random.insideUnitSphere;
+            Vector3 randomPos = transform.position + MinDistance * randDir.normalized + Spread * randDir;
 
-            while (randomPos.magnitude < MinDistance)
-            {
-                randomPos = transform.position + Random.insideUnitSphere * Random.value * Spread;
-            }
 
-            //            var randomAngle = Random.Range(0, 360f);
-            //            var randomScale = ;
+            var instance = Instantiate(Prefabs[Random.Range(0, Prefabs.Length)], randomPos, Quaternion.AngleAxis(Random.Range(0, 360f), Vector3.up), transform);
 
-            var instance = Instantiate(Prefab, randomPos, Quaternion.AngleAxis(Random.Range(0, 360f), Vector3.up), transform);
-
-            instance.localScale = new Vector3(Random.Range(MinScale, MaxScale), Random.Range(MinScale, MaxScale), Random.Range(MinScale, MaxScale));
+            instance.localScale = Vector3.one * Random.Range(MinScale, MaxScale);
 
             i++;
         }
