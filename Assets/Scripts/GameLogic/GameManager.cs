@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     public bool DEBUG;
 
+    public UIText UiText;
 
     [SerializeField]
     private Text Text;
@@ -126,6 +127,7 @@ public class GameManager : MonoBehaviour
         Village.AddOnDestroyListener(delegate ()
         {
             villageObjects.Remove(Village);
+            UiText.addVillage();
 
             Timer(2, delegate
             {
@@ -165,6 +167,8 @@ public class GameManager : MonoBehaviour
         WaypointManager.SetActive(true);
 
         StartCoroutine(Villages());
+
+        UiText.gameObject.SetActive(true);
     }
 
 
@@ -176,6 +180,7 @@ public class GameManager : MonoBehaviour
     public void Blur()
     {
         CameraAnimator.SetTrigger("Blurry");
+        UiText.addHit();
     }
 
     public void ExitToMenu()
