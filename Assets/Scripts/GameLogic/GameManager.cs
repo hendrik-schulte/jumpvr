@@ -164,6 +164,7 @@ public class GameManager : MonoBehaviour
     {
         MainMenu.Deactivated();
 
+        AmbientSoundManager.Instance.enableIdleSounds();
 
         WaypointManager.SetActive(true);
 
@@ -189,6 +190,7 @@ public class GameManager : MonoBehaviour
         gamePaused = true;
         UiText.resetValues();
         UiText.gameObject.SetActive(false);
+        AmbientSoundManager.Instance.disableIdleSounds();
 
         MainMenu.Activated();
 

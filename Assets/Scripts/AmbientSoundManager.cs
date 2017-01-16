@@ -20,13 +20,16 @@ public class AmbientSoundManager : MonoBehaviour
     [Range(0, 10)]
     private float Intensity;
 
+    private bool idleSoundsShouldPlay;
     private float elapsedTime;
     private float currentCheckTime;
     private float[] idleSoundPropabilities;
 
+    public static AmbientSoundManager Instance;
+
     void Awake()
     {
-
+        if (!Instance) Instance = this;
     }
 
     void Start()
@@ -41,24 +44,27 @@ public class AmbientSoundManager : MonoBehaviour
 
     void Update()
     {
-        elapsedTime += Time.deltaTime;
-        currentCheckTime += Time.deltaTime;
-
-        if (currentCheckTime >= TryToPlayEvery)
+        if (idleSoundsShouldPlay)
         {
-            currentCheckTime = 0f;
-            if (Random.value <= IdleProbabilityCurve.Evaluate(elapsedTime))
+            elapsedTime += Time.deltaTime;
+            currentCheckTime += Time.deltaTime;
+
+            if (currentCheckTime >= TryToPlayEvery)
             {
-                elapsedTime = 0f;
-                float addedProbs = 0f;
-                for (int i = 0; i < idleSoundPropabilities.Length; i++)
+                currentCheckTime = 0f;
+                if (Random.value <= IdleProbabilityCurve.Evaluate(elapsedTime))
                 {
-                    addedProbs += idleSoundPropabilities[i];
-                    if (Random.value <= addedProbs || i == idleSoundPropabilities.Length - 1)
+                    elapsedTime = 0f;
+                    float addedProbs = 0f;
+                    for (int i = 0; i < idleSoundPropabilities.Length; i++)
                     {
-                        AudioSource.PlayOneShot(IdleSounds[i]);
-                        adjustProbabilities(i);
-                        break;
+                        addedProbs += idleSoundPropabilities[i];
+                        if (Random.value <= addedProbs || i == idleSoundPropabilities.Length - 1)
+                        {
+                            AudioSource.PlayOneShot(IdleSounds[i]);
+                            adjustProbabilities(i);
+                            break;
+                        }
                     }
                 }
             }
@@ -80,5 +86,17 @@ public class AmbientSoundManager : MonoBehaviour
                 idleSoundPropabilities[i] += probAdjust / (idleSoundPropabilities.Length - 1);
             }
         }
+    }
+
+    public void enableIdleSounds()
+    {
+        idleSoundsShouldPlay = true;
+    }
+
+    public void disableIdleSounds()
+    {
+        idleSoundsShouldPlay = false;
+        elapsedTime = 0f;
+        currentCheckTime = 0f;
     }
 }
