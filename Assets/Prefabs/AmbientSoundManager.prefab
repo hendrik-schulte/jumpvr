@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AudioSource: {fileID: 82231806598456818}
-  Ambient: {fileID: 0}
+  Ambient: {fileID: 8300000, guid: 75c9c323f9ab93c49872beb055bdb641, type: 3}
   IdleSounds:
   - {fileID: 8300000, guid: 2c21eb8a98bd2004793dcea378859ba6, type: 3}
   - {fileID: 8300000, guid: 9e6b31dffbb54c24da811b79f5508015, type: 3}
@@ -158,4 +158,3 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   TryToPlayEvery: 1
-  Intensity: 0

@@ -859,7 +859,7 @@ MonoBehaviour:
   schleuderArm: {fileID: 1000012305781018}
   animator: {fileID: 95828107819480096}
   katapult: {fileID: 1000010475528706}
-  maxTimeUntilShoot: 6
+  maxTimeUntilShoot: 9
   tryToShootEverery: 1
   forceScale: 20
   anglePlus: 70
@@ -900,6 +900,7 @@ MonoBehaviour:
   ForceThreshold: 3
   IsLiving: 1
   DoNotDestroy: 0
+  HitMask: {x: 0.5, y: 1.2, z: 0.5}
   OnDestroySound: {fileID: 8300000, guid: 5f2b7a67b28bd844a80736f6fc593f80, type: 3}
   DebugKeys: 0
 --- !u!114 &114000012834868940

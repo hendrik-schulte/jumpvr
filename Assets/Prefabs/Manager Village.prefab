@@ -1230,6 +1230,7 @@ MonoBehaviour:
   ForceThreshold: 3
   IsLiving: 1
   DoNotDestroy: 0
+  HitMask: {x: 0.5, y: 1.2, z: 0.5}
   OnDestroySound: {fileID: 8300000, guid: 7ae89fcc26f45d94fbcf18b15dfb08c6, type: 3}
   DebugKeys: 0
 --- !u!114 &114035769034888758
@@ -1530,7 +1531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_agentPrefab: {fileID: 1169944161676452, guid: 9da01a5ebdb84d647ad5b89f166e0b80,
     type: 2}
-  m_amountToSpawn: 10
+  m_amountToSpawn: 4
   spawnInterval: 1
   m_spawnPoint: {fileID: 4092713485713934}
   m_infinite: 0

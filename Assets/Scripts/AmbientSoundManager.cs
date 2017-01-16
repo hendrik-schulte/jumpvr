@@ -14,11 +14,6 @@ public class AmbientSoundManager : MonoBehaviour
     [Header("Idle Sounds Logic")]
     public AnimationCurve IdleProbabilityCurve;
     public float TryToPlayEvery;
-    
-
-    [SerializeField]
-    [Range(0, 10)]
-    private float Intensity;
 
     private bool idleSoundsShouldPlay;
     private float elapsedTime;
