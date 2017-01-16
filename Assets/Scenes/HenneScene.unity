@@ -11309,6 +11309,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 114157163552419262, guid: 496a0fc52cf09e043b47d68970ca19b3,
+        type: 2}
+      propertyPath: IdleProbabilityCurve.m_Curve.Array.data[1].time
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 114157163552419262, guid: 496a0fc52cf09e043b47d68970ca19b3,
+        type: 2}
+      propertyPath: IdleProbabilityCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114157163552419262, guid: 496a0fc52cf09e043b47d68970ca19b3,
+        type: 2}
+      propertyPath: IdleProbabilityCurve.m_Curve.Array.data[1].inSlope
+      value: 0.0789735
+      objectReference: {fileID: 0}
+    - target: {fileID: 114157163552419262, guid: 496a0fc52cf09e043b47d68970ca19b3,
+        type: 2}
+      propertyPath: IdleProbabilityCurve.m_Curve.Array.data[1].outSlope
+      value: 0.0789735
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 496a0fc52cf09e043b47d68970ca19b3, type: 2}
   m_IsPrefabParent: 0
