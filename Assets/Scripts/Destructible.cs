@@ -27,6 +27,9 @@ public class Destructible : MonoBehaviour, ForceReceiver
     [SerializeField]
     private bool DoNotDestroy = false;
 
+    [SerializeField]
+    private Vector3 HitMask = new Vector3(0.5f, 1.2f, 0.5f);
+
     [Header("Sounds")]
     [SerializeField]
     private AudioClip OnDestroySound;
@@ -85,7 +88,9 @@ public class Destructible : MonoBehaviour, ForceReceiver
 
     public void OnHit(Vector3 impulse)
     {
-        if (impulse.magnitude >= ForceThreshold) DestroyBuilding(); ;
+        float force = new Vector3(impulse.x*HitMask.x, impulse.y*HitMask.y, impulse.z*HitMask.z).magnitude;
+
+        if (force >= ForceThreshold) DestroyBuilding(); ;
     }
 
     public void DestroyBuilding()

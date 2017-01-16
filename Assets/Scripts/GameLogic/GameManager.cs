@@ -70,6 +70,8 @@ public class GameManager : MonoBehaviour
         foreach (var Transform in BuildingSites.GetComponentsInChildren<Transform>())
         {
             if(Transform == BuildingSites.transform) continue;
+            if(!Transform.gameObject.activeSelf) continue;
+
             villagesToSpawn.Add(new BuildingSite(Transform.position));
         }
     }

@@ -21,6 +21,8 @@ public class Spin : MonoBehaviour
 
     IEnumerator UpdateAll()
     {
+        yield return new WaitForSeconds(Random.Range(0f, 1f));
+
         while (true)
         {
             if (ScaleBased) transform.rotation = Quaternion.Euler(
@@ -32,7 +34,7 @@ public class Spin : MonoBehaviour
                 transform.rotation.eulerAngles.y + Time.deltaTime * Speed,
                 transform.rotation.eulerAngles.z);
 
-            yield return null;
+            yield return new WaitForSeconds(0.25f);
         }
     }
 }

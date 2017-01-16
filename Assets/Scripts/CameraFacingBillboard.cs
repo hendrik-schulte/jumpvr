@@ -23,7 +23,7 @@ public class CameraFacingBillboard : MonoBehaviour
         while (true)
         {
             transform.LookAt(Camera.main.transform.position, Vector3.up);
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(1.4f);
         }
     }
 }
