@@ -27,6 +27,11 @@ public class Destructible : MonoBehaviour, ForceReceiver
     [SerializeField]
     private bool DoNotDestroy = false;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip OnDestroySound;
+
+
     [Header("Debug Values")]
     [SerializeField]
     private bool DebugKeys;
@@ -74,7 +79,7 @@ public class Destructible : MonoBehaviour, ForceReceiver
     {
         if (!AudioSource) return;
 
-        AudioSource.PlayOneShot(AudioSource.clip);
+        if(OnDestroySound) AudioSource.PlayOneShot(OnDestroySound);
     }
 
 

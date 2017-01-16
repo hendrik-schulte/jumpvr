@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SchleuderScript : MonoBehaviour {
+public class SchleuderScript : MonoBehaviour
+{
 
     [Header("Objects")]
     public GameObject zahnrad;
     public GameObject geschossParent;
     public GameObject schleuderArm;
     public Animator animator;
-//    public GameObject trollKopf;
+    //    public GameObject trollKopf;
     public GameObject katapult;
 
     [Header("Variables for shooting")]
@@ -20,22 +21,32 @@ public class SchleuderScript : MonoBehaviour {
     public AnimationCurve shootProbability;
 
     Quaternion rotation;
-	Vector3 catToPlayer;
+    Vector3 catToPlayer;
     private float elapsedTime;
     private bool canShoot;
     private float elapsedTimeTillPoll;
 
+    [SerializeField]
+    private AudioSource AudioSource;
+
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip OnShootSound;
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         geschossParent.GetComponent<SteinScript>().setParent(true);
         elapsedTime = 0f;
         canShoot = true;
         elapsedTimeTillPoll = 0f;
 
+        if (!AudioSource) AudioSource = GetComponent<AudioSource>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         elapsedTime += Time.deltaTime;
         elapsedTimeTillPoll += Time.deltaTime;
 
@@ -51,7 +62,7 @@ public class SchleuderScript : MonoBehaviour {
         if (elapsedTimeTillPoll >= tryToShootEverery)
         {
             elapsedTimeTillPoll = 0f;
-            
+
 
             if (canShoot && Mathf.Abs(Vector3.Angle(zahnrad.transform.forward, catToPlayer)) < 20f)
             {
@@ -61,24 +72,33 @@ public class SchleuderScript : MonoBehaviour {
                     canShoot = false;
                     elapsedTime = 0f;
                     animator.SetTrigger("Fire");
+                    Invoke("shootSound", 0.15f);
                     Invoke("shoot", 0.3f);
                     //shoot();
                 }
             }
-		
-        }else if (Input.GetKeyUp(KeyCode.L))
+
+        }
+        else if (Input.GetKeyUp(KeyCode.L))
         {
             canShoot = false;
             elapsedTime = 0f;
             animator.SetTrigger("Fire");
+            Invoke("shootSound", 0.15f);
             Invoke("shoot", 0.3f);
         }
 
     }
 
-	public void shoot(){
+    private void shootSound()
+    {
+        if (AudioSource & OnShootSound) AudioSource.PlayOneShot(OnShootSound);
+    }
 
-        
+    public void shoot()
+    {
+
+
         GameObject geschoss = Instantiate<GameObject>(geschossParent, schleuderArm.transform);
         geschoss.SetActive(true);
         geschoss.GetComponent<Rigidbody>().isKinematic = false;
@@ -87,7 +107,6 @@ public class SchleuderScript : MonoBehaviour {
         geschoss.GetComponent<Rigidbody>().AddForce(shootVec * forceScale, ForceMode.Impulse);
         geschoss.transform.parent = null;
 
-            
         Invoke("onShootingFinished", 2.25f); //Die Shoot-Animation des Katapults dauert 2.25 Sekunden
     }
 

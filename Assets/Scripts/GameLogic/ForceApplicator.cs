@@ -75,7 +75,7 @@ public class ForceApplicator : MonoBehaviour
         if (receiver != null) receiver.OnHit(Velocity);
 
 
-        print("Hit with force: " + Velocity + " magnitude: " + Velocity.magnitude);
+//        print("Hit with force: " + Velocity + " magnitude: " + Velocity.magnitude);
 
 //        Debug.
 

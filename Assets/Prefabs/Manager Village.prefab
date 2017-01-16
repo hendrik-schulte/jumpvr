@@ -1230,6 +1230,7 @@ MonoBehaviour:
   ForceThreshold: 3
   IsLiving: 1
   DoNotDestroy: 0
+  OnDestroySound: {fileID: 8300000, guid: 7ae89fcc26f45d94fbcf18b15dfb08c6, type: 3}
   DebugKeys: 0
 --- !u!114 &114035769034888758
 MonoBehaviour:

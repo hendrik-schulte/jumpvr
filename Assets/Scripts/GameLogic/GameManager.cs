@@ -164,6 +164,7 @@ public class GameManager : MonoBehaviour
     {
         MainMenu.Deactivated();
 
+
         WaypointManager.SetActive(true);
 
         StartCoroutine(Villages());
@@ -186,11 +187,14 @@ public class GameManager : MonoBehaviour
     public void ExitToMenu()
     {
         gamePaused = true;
+        UiText.resetValues();
+        UiText.gameObject.SetActive(false);
 
         MainMenu.Activated();
 
         WaypointManager.SetActive(false);
         ResetGame();
+        
     }
 
     private void Timer(float time, UnityAction action)

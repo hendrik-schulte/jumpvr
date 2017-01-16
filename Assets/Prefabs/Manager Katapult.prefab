@@ -881,6 +881,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  AudioSource: {fileID: 82057118288381224}
+  OnShootSound: {fileID: 8300000, guid: 5899e7acd7b304f4da37623699aa8dde, type: 3}
 --- !u!114 &114000010542969452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -894,10 +896,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animator: {fileID: 95000011600908664}
   ParticleSystem: {fileID: 198000012024886016}
-  AudioSource: {fileID: 0}
+  AudioSource: {fileID: 82057118288381224}
   ForceThreshold: 3
   IsLiving: 1
   DoNotDestroy: 0
+  OnDestroySound: {fileID: 8300000, guid: 5f2b7a67b28bd844a80736f6fc593f80, type: 3}
   DebugKeys: 0
 --- !u!114 &114000012834868940
 MonoBehaviour:
