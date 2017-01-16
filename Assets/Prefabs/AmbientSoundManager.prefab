@@ -134,5 +134,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioSource: {fileID: 82231806598456818}
   Ambient: {fileID: 0}
-  IdleSounds: []
+  IdleSounds:
+  - {fileID: 8300000, guid: 2c21eb8a98bd2004793dcea378859ba6, type: 3}
+  - {fileID: 8300000, guid: 9e6b31dffbb54c24da811b79f5508015, type: 3}
+  - {fileID: 8300000, guid: dccdf56ac312cff428135f995ba0c3c5, type: 3}
+  - {fileID: 8300000, guid: 9b4092d195d54014bac062e1f6494f8b, type: 3}
+  IdleProbabilityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 20
+      value: 1
+      inSlope: 0.14382094
+      outSlope: 0.14382094
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  TryToPlayEvery: 1
   Intensity: 0
