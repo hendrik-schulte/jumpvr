@@ -30,6 +30,10 @@ public class AmbientSoundManager : MonoBehaviour
     void Start()
     {
         AudioSource = GetComponent<AudioSource>();
+    }
+
+    void ResetProbabilities()
+    {
         idleSoundPropabilities = new float[IdleSounds.Length];
         for (int i = 0; i < idleSoundPropabilities.Length; i++)
         {
@@ -86,6 +90,7 @@ public class AmbientSoundManager : MonoBehaviour
     public void enableIdleSounds()
     {
         idleSoundsShouldPlay = true;
+        ResetProbabilities();
     }
 
     public void disableIdleSounds()

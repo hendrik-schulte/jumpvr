@@ -2695,7 +2695,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 588f9f56e317c8b48a35403b3e972b62, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6271,7 +6271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jointType: 1
-  _setRotation: 1
+  _setRotation: 0
   _setPosition: 1
   DebugLog: 0
 --- !u!1 &751100047
@@ -11277,6 +11277,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114157163552419262, guid: 496a0fc52cf09e043b47d68970ca19b3,
+        type: 2}
+      propertyPath: IdleSounds.Array.size
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4595981083224988, guid: 496a0fc52cf09e043b47d68970ca19b3, type: 2}
       propertyPath: m_LocalPosition.x
       value: -0.021054268
@@ -11329,6 +11334,51 @@ Prefab:
       propertyPath: IdleProbabilityCurve.m_Curve.Array.data[1].outSlope
       value: 0.0789735
       objectReference: {fileID: 0}
+    - target: {fileID: 114157163552419262, guid: 496a0fc52cf09e043b47d68970ca19b3,
+        type: 2}
+      propertyPath: IdleSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: a1ee76f524741094e9482c62d5160e20, type: 3}
+    - target: {fileID: 114157163552419262, guid: 496a0fc52cf09e043b47d68970ca19b3,
+        type: 2}
+      propertyPath: IdleSounds.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: f281d5a4651e1104d97cff42bdaf0935, type: 3}
+    - target: {fileID: 114157163552419262, guid: 496a0fc52cf09e043b47d68970ca19b3,
+        type: 2}
+      propertyPath: IdleSounds.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5e936ea3fa6d05b41b83849cba58639a, type: 3}
+    - target: {fileID: 114157163552419262, guid: 496a0fc52cf09e043b47d68970ca19b3,
+        type: 2}
+      propertyPath: IdleSounds.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: b827f36cd0173c14e86e21a7533be482, type: 3}
+    - target: {fileID: 114157163552419262, guid: 496a0fc52cf09e043b47d68970ca19b3,
+        type: 2}
+      propertyPath: IdleSounds.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: 88ac75ec69cca3948a1d5c7d282da816, type: 3}
+    - target: {fileID: 114157163552419262, guid: 496a0fc52cf09e043b47d68970ca19b3,
+        type: 2}
+      propertyPath: IdleSounds.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: bc9476d9166ad0443aaf75091809b827, type: 3}
+    - target: {fileID: 114157163552419262, guid: 496a0fc52cf09e043b47d68970ca19b3,
+        type: 2}
+      propertyPath: IdleSounds.Array.data[10]
+      value: 
+      objectReference: {fileID: 8300000, guid: 98dc181c2111dec41bf1467fc76ef607, type: 3}
+    - target: {fileID: 114157163552419262, guid: 496a0fc52cf09e043b47d68970ca19b3,
+        type: 2}
+      propertyPath: IdleSounds.Array.data[11]
+      value: 
+      objectReference: {fileID: 8300000, guid: 010eacd7596be7f4aa21e2b374a5b344, type: 3}
+    - target: {fileID: 114157163552419262, guid: 496a0fc52cf09e043b47d68970ca19b3,
+        type: 2}
+      propertyPath: IdleSounds.Array.data[12]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5d4d748240930c44992307f854cf6681, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 496a0fc52cf09e043b47d68970ca19b3, type: 2}
   m_IsPrefabParent: 0
@@ -13893,7 +13943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jointType: 3
-  _setRotation: 1
+  _setRotation: 0
   _setPosition: 1
   DebugLog: 0
 --- !u!1 &1614017365
@@ -19256,6 +19306,20 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22485790, guid: bdbb2cc8909f611469ad6012660648ce, type: 2}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224778314841432584, guid: bdbb2cc8909f611469ad6012660648ce,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 42.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224778314841432584, guid: bdbb2cc8909f611469ad6012660648ce,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -100.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1627327146136000, guid: bdbb2cc8909f611469ad6012660648ce, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
