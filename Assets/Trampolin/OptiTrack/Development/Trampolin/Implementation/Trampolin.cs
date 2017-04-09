@@ -151,36 +151,12 @@ public class Trampolin : MonoBehaviour
 
     private void Start()
     {
-        //adding joints
-        Head = TrackingManager.Instance.Head != null ? TrackingManager.Instance.Head.transform : null;
-        LeftFoot = TrackingManager.Instance.LeftFoot != null ? TrackingManager.Instance.LeftFoot.transform : null;
-        RightFoot = TrackingManager.Instance.RightFoot != null ? TrackingManager.Instance.RightFoot.transform : null;
-        LeftHand = TrackingManager.Instance.LeftHand != null ? TrackingManager.Instance.LeftHand.transform : null;
-        RightHand = TrackingManager.Instance.RightHand != null ? TrackingManager.Instance.RightHand.transform : null;
-        LeftKnee = TrackingManager.Instance.LeftKnee != null ? TrackingManager.Instance.LeftKnee.transform : null;
-        RightKnee = TrackingManager.Instance.RightKnee != null ? TrackingManager.Instance.RightKnee.transform : null;
-        LeftElbow = TrackingManager.Instance.LeftElbow != null ? TrackingManager.Instance.LeftElbow.transform : null;
-        RightElbow = TrackingManager.Instance.RightElbow != null ? TrackingManager.Instance.RightElbow.transform : null;
-
-        //put joints in list
-        _joints = new List<Transform>();
-        _joints.Add(Head);
-        _joints.Add(RightHand);
-        _joints.Add(LeftHand);
-        _joints.Add(RightFoot);
-        _joints.Add(LeftFoot);
-        _joints.Add(RightElbow);
-        _joints.Add(LeftElbow);
-        _joints.Add(RightKnee);
-        _joints.Add(LeftKnee);
-        _joints.RemoveAll(item => item == null);
-
         //init my vars
         _isCalibrated = false;
         RegisterOnStateChanged(ChangedState);
         //vpc = new ValuePlotterController(this.gameObject, new Rect(0, 0, 100, 100), Color.black, Color.white, -30, 30);
         StartCoroutine(VoiceGuidance());
-        StartCoroutine(WaitAndStartCalibration( _preDelay,_secondsTillCalibration));
+        StartCoroutine(WaitAndStartCalibration(_preDelay, _secondsTillCalibration));
     }
 
 
@@ -199,8 +175,14 @@ public class Trampolin : MonoBehaviour
         //
         //yield return new WaitForSeconds(3);
         yield return new WaitForSeconds(waitForSeconds);
-        if(!_isCalibrated)
+        /*
+        if (!_isCalibrated)
             StartCoroutine(StartCalibration(calibrationDelay));
+
+        */
+        tPoseText.text = "";
+        tPoseDummy.SetActive(false);
+        GameManager.Instance.CalibrationDone();
     }
 
     public void Recalibrate()
@@ -239,10 +221,10 @@ public class Trampolin : MonoBehaviour
             _interaction.Calibrate();
             InputTracking.Recenter();
             Debug.Log("grea-uuuht success! (Calibrated)");
-            PlayAudioClip(_finishCalibrationClip);
+            //PlayAudioClip(_finishCalibrationClip);
             if(CalibrationDone != null) CalibrationDone();
             yield return new WaitForSeconds(_finishCalibrationClip.length);
-            PlayAudioClip(_finishCalibrationVoice);
+            //PlayAudioClip(_finishCalibrationVoice);
             
             _calibrationStarted = false;
             tPoseText.text = "";
@@ -315,18 +297,7 @@ public class Trampolin : MonoBehaviour
     private bool IsInTPose()
     {
         //hand rigidbody have to be carried, not layed on the ground
-        if(RightHand.localPosition.y > 0.5 && LeftHand.localPosition.y > 0.5)
-        {
-            //hands need certain distance
-            if (Mathf.Abs(RightHand.localPosition.x - LeftHand.localPosition.x) > 1.2)
-            {
-                //they have to be in nearly same y and z position
-                if (Mathf.Abs(RightHand.localPosition.z - LeftHand.localPosition.z) < 0.2 && Mathf.Abs(RightHand.localPosition.y - LeftHand.localPosition.y) < 0.2)
-                {
-                    return true;
-                }
-            }
-        }
+
 
         return false;
     }
